@@ -43,13 +43,13 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $videoRepository;
 
 	/**
-	 * action list
+	 * action show
 	 *
 	 * @return void
 	 */
-	public function listAction() {
+	public function showAction() {
 		$videos = $this->videoRepository->findAll();
-                $this->view->assign('videos', $videos);
+                $this->view->assign('video', $video[0]);
 	}
 
 	private function addJs()
@@ -57,22 +57,6 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 $GLOBALS['TSFE']->additionalHeaderData['FLOW_MIN'] = '<script type="text/javascript" src="typo3conf/ext/yb_videoplayer/flowplayer/flowplayer-3.2.12.min.js"></script>';
                 $GLOBALS['TSFE']->additionalHeaderData['FLOW_PLAYLIST_MIN'] = '<script type="text/javascript" src="typo3conf/ext/ci_flowplayer/flowplayer/flowplayer.playlist-3.0.8.min.js"></script>';
 	}
-
-	/**
-	 * action show
-	 *
-	 * @param \TYPO3\YbVideoplayer\Domain\Model\Video $video
-	 * @return void
-	 */
-	public function showAction(\TYPO3\YbVideoplayer\Domain\Model\Video $video) {
-		$this->view->assign('video', $video);
-	}
-
-/*	public function showByTag(\TYPO3\YbVideoplayer\Domain\Model\Tag $tag)
-	{
-		$videos = 
-	}*/
-
 }
 ?>
 

@@ -8,7 +8,7 @@ if (!defined('TYPO3_MODE')) {
 	'Ybvideoplayerfr',
 	array(
 #		'Playlist' => 'show',
-		'Video' => 'list, show',
+		'Video' => 'show',
 #		'Tag' => 'show',
 		
 	),

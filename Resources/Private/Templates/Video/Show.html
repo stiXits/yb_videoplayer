@@ -1,4 +1,4 @@
-yout name="Default" />
+<f:layout name="Default" />
 <f:section name="main">
 <f:flashMessages />
 
@@ -24,7 +24,7 @@ yout name="Default" />
                            </style>
 ]]>
 
-<div class="flowplayer fixed-controls play-button color-light" style="background-image: url({videos.0.preview.originalResource.publicUrl});" data-ratio="0.416" data-embed="false">
+<div class="flowplayer fixed-controls play-button color-light" style="background-image: url({video.preview.originalResource.publicUrl});" data-ratio="0.416" data-embed="false">
 
-	<f:render partial="VideoContainer" arguments="{video: videos.0}"/>
+	<f:render partial="Video/VideoContainer" arguments="{video: video}"/></div>
 </f:section>
