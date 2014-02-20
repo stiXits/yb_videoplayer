@@ -50,18 +50,26 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $description;
 
 	/**
-	 * deprecated: preview image
+	 * preview image
 	 *
-	 * @var \string
+	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
 	 */
 	protected $preview;
 
-	/**
-	 * deprecated: video path
-	 *
-	 * @var \string
-	 */
-	protected $videoid;
+        /**
+         * endscreen image
+         *
+         * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+         */
+        protected $endscreen;
+
+        /**
+         * subtitles file
+         *
+         * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+         */
+        protected $subtitles;
+
 
 	/**
 	 * the videos title
@@ -77,30 +85,6 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $tag;
 
-#	/**
-#	 * __construct
-#	 *
-#	 * @return Video
-#	 */
-#	public function __construct() {
-#		//Do not remove the next line: It would break the functionality
-#		$this->initStorageObjects();
-#	}
-#
-#	/**
-#	 * Initializes all ObjectStorage properties.
-#	 *
-#	 * @return void
-#	 */
-#	protected function initStorageObjects() {
-#		/**
-#		 * Do not modify this method!
-#		 * It will be rewritten on each save in the extension builder
-#		 * You may modify the constructor of this class instead
-#		 */
-#		$this->tag = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-#	}
-#
 	/**
 	 * Returns the file
 	 *
@@ -143,7 +127,7 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the preview
 	 *
-	 * @return \string $preview
+	 * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $preview
 	 */
 	public function getPreview() {
 		return $this->preview;
@@ -152,7 +136,7 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the preview
 	 *
-	 * @param \string $preview
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $preview
 	 * @return void
 	 */
 	public function setPreview($preview) {
@@ -160,42 +144,43 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Returns the preview2
+	 * Returns the endscreen
 	 *
-	 * @return \string $preview2
+	 * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $endscreen
 	 */
-	public function getPreview2() {
-		return $this->preview2;
+	public function getEndscreen() {
+		return $this->endscreen;
 	}
 
 	/**
-	 * Sets the preview2
+	 * Sets the endscreen
 	 *
-	 * @param \string $preview2
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $endscreen
 	 * @return void
 	 */
-	public function setPreview2($preview2) {
-		$this->preview2 = $preview2;
+	public function setEndscreen($endscreen) {
+		$this->endscreen = $endscreen;
 	}
 
-	/**
-	 * Returns the videoid
-	 *
-	 * @return \string $videoid
-	 */
-	public function getVideoid() {
-		return $this->videoid;
-	}
+        /**
+         * Returns the subtitles
+         *
+         * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $subtitles
+         */
+        public function getSubtitles() {
+                return $this->subtitles;
+        }
 
-	/**
-	 * Sets the videoid
-	 *
-	 * @param \string $videoid
-	 * @return void
-	 */
-	public function setVideoid($videoid) {
-		$this->videoid = $videoid;
-	}
+        /**
+         * Sets the subtitles
+         *
+         * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $subtitles
+         * @return void
+         */
+        public function setSubtitles($subtitles) {
+                $this->subtitles = $subtitles;
+        }
+
 
 	/**
 	 * Returns the title
@@ -217,7 +202,7 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Adds a
+	 * Adds a tag
 	 *
 	 * @param \TYPO3\YbVideoplayer\Domain\Model\Tag $tag
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> tag
@@ -227,7 +212,7 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Removes a
+	 * Removes a tag
 	 *
 	 * @param \TYPO3\YbVideoplayer\Domain\Model\Tag $tagToRemove The Tag to be removed
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> tag
@@ -246,25 +231,14 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Sets the tag
+	 * Sets the tags
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> $tag
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> tag
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> $tags
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> tags
 	 */
-	public function setTag(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $tag) {
-		$this->tag = $tag;
+	public function setTag(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $tags) {
+		$this->tag = $tags;
 	}
-
-        /**
-         * Returns the fileextension
-         *
-         * @return \string $extension
-         */
-        public function getExtension() {
-		preg_match("/.*\.(.*)/", $this->getVideoId(), $extension);;
-                return $extension[1];
-        }
-
 }
 ?>
 
