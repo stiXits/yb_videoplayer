@@ -57,13 +57,6 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $preview;
 
 	/**
-	 * deprecated: preview image 2
-	 *
-	 * @var \string
-	 */
-	protected $preview2;
-
-	/**
 	 * deprecated: video path
 	 *
 	 * @var \string

@@ -118,32 +118,22 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                'preview' => array (
                         'exclude' => 0,
                         'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.preview',
-                        'config' => array (
-                                'type' => 'group',
-                                'internal_type' => 'file',
-                                'allowed' => 'gif,png,jpeg,jpg',
-                                'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
-                                'show_thumbs' => 1,
-                                'size' => 1,
-                                'minitems' => 0,
-                                'maxitems' => 1,
-                        )
+                        'config' =>  \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('file', array(
+                                'appearance' => array(
+                                'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
+                                ),
+                        ), 'jpg,png,gif'),
                 ),
-               'subtitle' => array (
+              'subtitle' => array (
                         'exclude' => 0,
                         'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.subtitle',
-                        'config' => array (
-                                'type' => 'group',
-                                'internal_type' => 'file',
-                                'allowed' => '',
-                                'disallowed' => 'php,php3',
-                                'max_size' => $GLOBALS['TYPO3_CONF_VARS']['BE']['maxFileSize'],
-                                'size' => 1,
-                                'minitems' => 0,
-                                'maxitems' => 1,
-                        )
+                        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('file', array(
+                                'appearance' => array(
+                                'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
+                                ),
+                        ), 'srt'),
                 ),
-                'tag' => array(
+               'tag' => array(
                         'exclude' => 0,
                         'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.tag',
                         'config' => array(

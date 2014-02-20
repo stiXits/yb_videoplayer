@@ -51,6 +51,7 @@ CREATE TABLE tx_ybvideoplayer_domain_model_video (
 	file varchar(255)  NOT NULL,
 	description text NOT NULL,
 	preview varchar(255) DEFAULT '' NOT NULL,
+	endscreen varchar(255) DEFAULT '' NOT NULL,
 	title varchar(255) DEFAULT '' NOT NULL,
 	tag int(11) unsigned DEFAULT '0' NOT NULL,
 	subtitle varchar(255) DEFAULT '' NOT NULL,
