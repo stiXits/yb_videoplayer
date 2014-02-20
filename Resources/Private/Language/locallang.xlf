@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-09-30T11:41:39Z" product-name="yb_videoplayer">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_ybvideoplayer_domain_model_playlist">
+				<source>consists of several videos</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_playlist.description">
+				<source>textual description of the playlist</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_playlist.title">
+				<source>the playlists name</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_playlist.consists_of">
+				<source>Videos residing inside of a Playlist</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_ybvideoplayer_domain_model_video">
+				<source>capsules all Data needed to display a video</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_video.file">
+				<source>videofile</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_video.description">
+				<source>textual description of the video</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_video.preview">
+				<source>deprecated: preview image</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_video.preview2">
+				<source>deprecated: preview image 2</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_video.videoid">
+				<source>deprecated: video path</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_video.title">
+				<source>the videos title</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_video.tag">
+				<source>tag to categorize the video</source>
+			</trans-unit>
+			
+			<trans-unit id="tx_ybvideoplayer_domain_model_tag">
+				<source>describes videos an playlists</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_tag.title">
+				<source>tagname</source>
+			</trans-unit>
+			<trans-unit id="tx_ybvideoplayer_domain_model_tag.description">
+				<source>the tags description</source>
+			</trans-unit>
+			
+		</body>
+	</file>
+</xliff>

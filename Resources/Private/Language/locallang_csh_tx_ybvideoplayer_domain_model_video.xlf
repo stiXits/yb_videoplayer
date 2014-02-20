@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-09-30T11:41:39Z" product-name="yb_videoplayer">
+		<header/>
+		<body>
+
+			<trans-unit id="file.description">
+				<source>videofile</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>textual description of the video</source>
+			</trans-unit>
+			<trans-unit id="preview.description">
+				<source>deprecated: preview image</source>
+			</trans-unit>
+			<trans-unit id="title.description">
+				<source>the videos title</source>
+			</trans-unit>
+			<trans-unit id="tag.description">
+				<source>tag to categorize the video</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
