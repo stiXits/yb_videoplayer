@@ -29,8 +29,8 @@
 			<trans-unit id="tx_ybvideoplayer_domain_model_video.preview">
 				<source>Preview</source>
 			</trans-unit>
-			<trans-unit id="tx_ybvideoplayer_domain_model_video.preview2">
-				<source>Preview2</source>
+			<trans-unit id="tx_ybvideoplayer_domain_model_video.endscreen">
+				<source>Endscreen</source>
 			</trans-unit>
 			<trans-unit id="tx_ybvideoplayer_domain_model_video.videoid">
 				<source>Videoid</source>

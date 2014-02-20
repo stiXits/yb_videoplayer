@@ -124,6 +124,15 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                                 ),
                         ), 'jpg,png,gif'),
                 ),
+               'endscreen' => array (
+                        'exclude' => 0,
+                        'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.endscreen',
+                        'config' =>  \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('file', array(
+                                'appearance' => array(
+                                'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
+                                ),
+                        ), 'jpg,png,gif'),
+                ),
               'subtitle' => array (
                         'exclude' => 0,
                         'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.subtitle',
