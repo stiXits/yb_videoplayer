@@ -65,7 +65,7 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'file,description,preview,title,tag,',
+		'searchFields' => 'file,description,title,tag,',
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Video.php',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_ybvideoplayer_domain_model_video.gif'
 	),
