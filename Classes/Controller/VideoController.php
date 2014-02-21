@@ -49,7 +49,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function showAction() {
 		$videos = $this->videoRepository->findAll();
-                $this->view->assign('video', $video[0]);
+                $this->view->assign('video', $videos[0]);
 	}
 
 	private function addJs()
