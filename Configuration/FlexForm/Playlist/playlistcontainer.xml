@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<T3DataStructure>
+  <sheets>
+    <sDEF>
+      <ROOT>
+        <TCEforms>
+          <sheetTitle>PlaylistContainer FlexForm</sheetTitle>
+        </TCEforms>
+        <type>array</type>
+        <el>
+          <switchableControllerActions>
+          <TCEforms>
+          <label>Standardaktion der Playlist</label>
+          <config>
+          <type>select</type>
+          <items>
+            <numIndex index="0">
+                <numIndex index="0">Alle Playlists</numIndex>
+                <numIndex index="1">PlaylistController->list</numIndex>
+            </numIndex>
+            <numIndex index="1">
+                <numIndex index="0">Einzelansicht</numIndex>
+                <numIndex index="1">PlaylistController->show</numIndex>
+            </numIndex>
+            </items>
+          </config>
+          </TCEforms>
+      </switchableControllerActions>
+        </el>
+      </ROOT>
+    </sDEF>
+  </sheets>
+</T3DataStructure>
