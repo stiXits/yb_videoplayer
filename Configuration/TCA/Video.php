@@ -6,7 +6,7 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_ybvideoplayer_domain_model_video'] = array (
         'ctrl' => $TCA['tx_ybvideoplayer_domain_model_video']['ctrl'],
         'interface' => array (
-                'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,starttime,endtime,title,description,preview,subtitle,tag,file'
+                'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,starttime,endtime,title,description,preview,subtitle,endscreen,tag,file'
         ),
         'feInterface' => $TCA['tx_ybvideoplayer_domain_model_video']['feInterface'],
         'columns' => array (
@@ -118,7 +118,7 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                'preview' => array (
                         'exclude' => 0,
                         'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.preview',
-                        'config' =>  \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('file', array(
+                        'config' =>  \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('preview', array(
                                 'appearance' => array(
                                 'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
                                 ),
@@ -127,7 +127,7 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                'endscreen' => array (
                         'exclude' => 0,
                         'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.endscreen',
-                        'config' =>  \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('file', array(
+                        'config' =>  \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('endscreen', array(
                                 'appearance' => array(
                                 'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
                                 ),
@@ -136,7 +136,7 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
               'subtitle' => array (
                         'exclude' => 0,
                         'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.subtitle',
-                        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('file', array(
+                        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('subtitle', array(
                                 'appearance' => array(
                                 'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
                                 ),
