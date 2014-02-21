@@ -5,9 +5,16 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
-	'Ybvideoplayerfr',
-	'videoplayer'
+	'videocontainer',
+	'video'
 );
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        $_EXTKEY,
+        'playlistcontainer',
+        'playlist'
+);
+
 
 if (TYPO3_MODE === 'BE') {
 
