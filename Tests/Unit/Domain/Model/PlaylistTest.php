@@ -88,58 +88,58 @@ class PlaylistTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function getConsistsOfReturnsInitialValueForVideo() { 
+	public function getVideosReturnsInitialValueForVideo() { 
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
-			$this->fixture->getConsistsOf()
+			$this->fixture->getVideos()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setConsistsOfForObjectStorageContainingVideoSetsConsistsOf() { 
-		$consistsOf = new \TYPO3\YbVideoplayer\Domain\Model\Video();
-		$objectStorageHoldingExactlyOneConsistsOf = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
-		$objectStorageHoldingExactlyOneConsistsOf->attach($consistsOf);
-		$this->fixture->setConsistsOf($objectStorageHoldingExactlyOneConsistsOf);
+	public function setVideosForObjectStorageContainingVideoSetsVideos() { 
+		$videos = new \TYPO3\YbVideoplayer\Domain\Model\Video();
+		$objectStorageHoldingExactlyOneVideos = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
+		$objectStorageHoldingExactlyOneVideos->attach($videos);
+		$this->fixture->setVideos($objectStorageHoldingExactlyOneVideos);
 
 		$this->assertSame(
-			$objectStorageHoldingExactlyOneConsistsOf,
-			$this->fixture->getConsistsOf()
+			$objectStorageHoldingExactlyOneVideos,
+			$this->fixture->getVideos()
 		);
 	}
 	
 	/**
 	 * @test
 	 */
-	public function addConsistsOfToObjectStorageHoldingConsistsOf() {
-		$consistsOf = new \TYPO3\YbVideoplayer\Domain\Model\Video();
-		$objectStorageHoldingExactlyOneConsistsOf = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
-		$objectStorageHoldingExactlyOneConsistsOf->attach($consistsOf);
-		$this->fixture->addConsistsOf($consistsOf);
+	public function addVideosToObjectStorageHoldingVideos() {
+		$videos = new \TYPO3\YbVideoplayer\Domain\Model\Video();
+		$objectStorageHoldingExactlyOneVideos = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
+		$objectStorageHoldingExactlyOneVideos->attach($videos);
+		$this->fixture->addVideos($videos);
 
 		$this->assertEquals(
-			$objectStorageHoldingExactlyOneConsistsOf,
-			$this->fixture->getConsistsOf()
+			$objectStorageHoldingExactlyOneVideos,
+			$this->fixture->getVideos()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function removeConsistsOfFromObjectStorageHoldingConsistsOf() {
-		$consistsOf = new \TYPO3\YbVideoplayer\Domain\Model\Video();
+	public function removeVideosFromObjectStorageHoldingVideos() {
+		$videos = new \TYPO3\YbVideoplayer\Domain\Model\Video();
 		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
-		$localObjectStorage->attach($consistsOf);
-		$localObjectStorage->detach($consistsOf);
-		$this->fixture->addConsistsOf($consistsOf);
-		$this->fixture->removeConsistsOf($consistsOf);
+		$localObjectStorage->attach($videos);
+		$localObjectStorage->detach($videos);
+		$this->fixture->addVideos($videos);
+		$this->fixture->removeVideos($videos);
 
 		$this->assertEquals(
 			$localObjectStorage,
-			$this->fixture->getConsistsOf()
+			$this->fixture->getVideos()
 		);
 	}
 	

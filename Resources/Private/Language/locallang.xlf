@@ -13,7 +13,7 @@
 			<trans-unit id="tx_ybvideoplayer_domain_model_playlist.title">
 				<source>the playlists name</source>
 			</trans-unit>
-			<trans-unit id="tx_ybvideoplayer_domain_model_playlist.consists_of">
+			<trans-unit id="tx_ybvideoplayer_domain_model_playlist.videos">
 				<source>Videos residing inside of a Playlist</source>
 			</trans-unit>
 			

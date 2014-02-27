@@ -10,7 +10,7 @@
 			<trans-unit id="title.description">
 				<source>the playlists name</source>
 			</trans-unit>
-			<trans-unit id="consists_of.description">
+			<trans-unit id="videos.description">
 				<source>Videos residing inside of a Playlist</source>
 			</trans-unit>
 		</body>

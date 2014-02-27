@@ -1,6 +1,7 @@
 <f:layout name="Default" />
 <f:section name="main">
 <f:flashMessages />
+	<p>Playlist:</p>
         <f:for each="{playlists}" as="playlist">
 	        <f:render partial="Playlist/PlaylistContainer" arguments="{playlist: playlist}"/>
        </f:for>

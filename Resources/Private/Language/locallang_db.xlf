@@ -13,8 +13,8 @@
 			<trans-unit id="tx_ybvideoplayer_domain_model_playlist.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_ybvideoplayer_domain_model_playlist.consists_of">
-				<source>Consists Of</source>
+			<trans-unit id="tx_ybvideoplayer_domain_model_playlist.videos">
+				<source>Videos</source>
 			</trans-unit>
 
 			<trans-unit id="tx_ybvideoplayer_domain_model_video">

@@ -54,7 +54,7 @@ class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video>
 	 * @lazy
 	 */
-	protected $consistsOf;
+	protected $videos;
 
 	/**
 	 * __construct
@@ -77,7 +77,7 @@ class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		 * It will be rewritten on each save in the extension builder
 		 * You may modify the constructor of this class instead
 		 */
-		$this->consistsOf = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->videos = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
@@ -121,40 +121,40 @@ class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Adds a
 	 *
-	 * @param \TYPO3\YbVideoplayer\Domain\Model\Video $consistsOf
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> consistsOf
+	 * @param \TYPO3\YbVideoplayer\Domain\Model\Video $videos
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> videos
 	 */
-	public function addConsistsOf($consistsOf) {
-		$this->consistsOf->attach($consistsOf);
+	public function addVideos($videos) {
+		$this->videos->attach($videos);
 	}
 
 	/**
 	 * Removes a
 	 *
-	 * @param \TYPO3\YbVideoplayer\Domain\Model\Video $consistsOfToRemove The Video to be removed
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> consistsOf
+	 * @param \TYPO3\YbVideoplayer\Domain\Model\Video $videosToRemove The Video to be removed
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> videos
 	 */
-	public function removeConsistsOf($consistsOfToRemove) {
-		$this->consistsOf->detach($consistsOfToRemove);
+	public function removeVideos($videosToRemove) {
+		$this->videos->detach($videosToRemove);
 	}
 
 	/**
-	 * Returns the consistsOf
+	 * Returns the videos
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> consistsOf
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> videos
 	 */
-	public function getConsistsOf() {
-		return $this->consistsOf;
+	public function getVideos() {
+		return $this->videos;
 	}
 
 	/**
-	 * Sets the consistsOf
+	 * Sets the videos
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> $consistsOf
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> consistsOf
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> $videos
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> videos
 	 */
-	public function setConsistsOf(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $consistsOf) {
-		$this->consistsOf = $consistsOf;
+	public function setVideos(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $videos) {
+		$this->videos = $videos;
 	}
 
 }
