@@ -42,6 +42,14 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	protected $videoRepository;
 
+        /**
+         * playlistRepository
+         *
+         * @var \TYPO3\YbVideoplayer\Domain\Repository\PlaylistRepository
+         * @inject
+         */
+        protected $playlistRepository;
+
 	/**
 	 * action show
 	 *
@@ -49,7 +57,9 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function showAction() {
 		$videos = $this->videoRepository->findAll();
+		$playlists = $this->playlistRepository->findAll();
                 $this->view->assign('video', $videos[0]);
+		$this->view->assign('playlist', $playlists[0]);
 	}
 
 	private function addJs()
