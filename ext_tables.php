@@ -9,11 +9,11 @@ if (!defined('TYPO3_MODE')) {
 	'video'
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-        $_EXTKEY,
-        'playlistcontainer',
-        'playlist'
-);
+#\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+#        $_EXTKEY,
+#        'playlistcontainer',
+#        'playlist'
+#);
 
 #$extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
 #$pluginSignature = strtolower($extensionName) . '_playlistcontainer';  
