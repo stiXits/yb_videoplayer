@@ -15,10 +15,10 @@ if (!defined('TYPO3_MODE')) {
         'playlist'
 );
 
-$extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
-$pluginSignature = strtolower($extensionName) . '_playlistcontainer';  
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:'.$_EXTKEY.'/Configuration/FlexForm/Playlist/playlistcontainer.xml');    
+#$extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
+#$pluginSignature = strtolower($extensionName) . '_playlistcontainer';  
+#$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+#t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:'.$_EXTKEY.'/Configuration/FlexForm/Playlist/playlistcontainer.xml');    
 
 if (TYPO3_MODE === 'BE') {
 

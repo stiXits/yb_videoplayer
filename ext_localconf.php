@@ -18,7 +18,7 @@ if (!defined('TYPO3_MODE')) {
         'TYPO3.' . $_EXTKEY,
         'playlistcontainer',
         array(
-               'Playlist' => 'list, show',
+               'Playlist' => 'list', 'show',
 
         ),
         // non-cacheable actions
