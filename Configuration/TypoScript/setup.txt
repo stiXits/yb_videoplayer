@@ -1,6 +1,6 @@
-page.includeCSS.flowplayerskin = EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/skin/minimalist.css
-page.includeCSS.flowplayerplaylist = EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/skin/playlist.css
-page.includeJS.flowplayermin = EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/flowplayer.min.js
+page.includeCSS.flowplayerskin = {$plugin.tx_ybvideoplayer.configuration.flowplayerSkinCss}
+page.includeCSS.flowplayerplaylist = {$plugin.tx_ybvideoplayer.configuration.flowplayerPlaylistCss}
+page.includeJS.flowplayermin = {$plugin.tx_ybvideoplayer.configuration.flowplayerJs}
 
 
 

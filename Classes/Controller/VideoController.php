@@ -63,11 +63,6 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$this->view->assign('playlist', $playlists[0]);
 	}
 
-	private function addJs()
-	{
-                $GLOBALS['TSFE']->additionalHeaderData['FLOW_MIN'] = '<script type="text/javascript" src="typo3conf/ext/yb_videoplayer/flowplayer/flowplayer-3.2.12.min.js"></script>';
-                $GLOBALS['TSFE']->additionalHeaderData['FLOW_PLAYLIST_MIN'] = '<script type="text/javascript" src="typo3conf/ext/ci_flowplayer/flowplayer/flowplayer.playlist-3.0.8.min.js"></script>';
-	}
 }
 ?>
 

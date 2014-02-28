@@ -11,6 +11,11 @@ plugin.tx_ybvideoplayer {
 		# cat=plugin.tx_ybvideoplayer//a; type=string; label=Default storage PID
 		storagePid =
 	}
+	configuration {
+		flowplayerSkinCss = EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/skin/minimalist.css
+		flowplayerPlaylistCss = EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/skin/playlist.css
+		flowplayerJs =  EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/flowplayer.min.js
+	}
 }
 
 module.tx_ybvideoplayer {
