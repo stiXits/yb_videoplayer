@@ -47,9 +47,9 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 *
 	 * @return void
 	 */
-	public function listAction() {
+	public function videolistAction() {
 		$playlists = $this->playlistRepository->findAll();
-		$this->view->assign('playlists', $playlists);
+		$this->view->assign('videolist', $playlists[0]);
 	}
 
 	/**

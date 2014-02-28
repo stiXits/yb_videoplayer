@@ -1,0 +1,7 @@
+<div class="yb_videolist">
+        <f:for each="{videolist.videos}" as="video" iteration="itemIteration">
+                <f:link.action action="show" controller="Video" arguments="{video: video}">
+                        <img style="height:100px;" src="{video.preview.originalResource.publicUrl}">
+		</f:link.action>
+       </f:for>
+</div>
