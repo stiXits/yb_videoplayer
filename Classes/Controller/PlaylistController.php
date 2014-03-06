@@ -48,7 +48,15 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * @return void
 	 */
 	public function videolistAction() {
-		$playlists = $this->playlistRepository->findAll();
+		$playlistsFromSettings = array($this->settings['playlists']);
+
+		$playlists = array();
+		//cummulate all assigned playlists to one
+		foreach($playlistsFromSettings as &$playlist)
+		{
+			array_push($playlists, $this->playlistRepository->findByUid($playlist));
+		}
+
 		$this->view->assign('videolist', $playlists[0]);
 	}
 
