@@ -55,6 +55,8 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		{
 			array_push($playlists, $this->playlistRepository->findByUid($playlist));
 		}
+
+		
 		$this->view->assign('videolists', $playlists);
 	}
 

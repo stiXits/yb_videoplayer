@@ -1,0 +1,21 @@
+<f:layout name="Default" />
+<f:section name="main">
+<f:flashMessages />
+
+<![CDATA[
+			<style>
+                          /* custom player skin */
+                           .flowplayer {background-color: #222; background-size: cover; max-width: 800px; max-height:600px}
+                           .flowplayer .fp-controls { background-color: rgba(0, 0, 0, 0.4)}
+                           .flowplayer .fp-timeline { background-color: rgba(0, 0, 0, 0.5)}
+                           .flowplayer .fp-progress { background-color: rgba(219, 0, 0, 1)}
+                           .flowplayer .fp-buffer { background-color: rgba(249, 249, 249, 1)}
+			   div .flowplayer {margin-bottom: 160px;}
+                           </style>
+]]>
+
+	<div class="flowplayer fixed-controls play-button color-light" style="background-image: url({video.preview.originalResource.publicUrl});" data-ratio="-0.5" data-embed="false">
+		<f:render partial="Video/VideoContainer" arguments="{video: video}"/>
+		<f:render partial="Playlist/PlaylistContainer" arguments="{playlist: playlist}"/>
+	</div>
+</f:section>
