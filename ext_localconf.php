@@ -5,9 +5,9 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	'TYPO3.' . $_EXTKEY,
-	'videocontainer',
+	'globalVideoPlayer',
 	array(
-		'Video' => 'show',
+		'Video' => 'showGlobalPlayer',
 	),
 	// non-cacheable actions
 	array(
@@ -16,7 +16,7 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'TYPO3.' . $_EXTKEY,
-        'videolistcontainer',
+        'videoListContainer',
         array(
                'Playlist' => 'videolist',
 

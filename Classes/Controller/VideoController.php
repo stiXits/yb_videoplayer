@@ -56,7 +56,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @param  \TYPO3\YbVideoplayer\Domain\Model\Video $video
 	 * @return void
 	 */
-	public function showAction($video) {
+	public function showGlobalPlayerAction($video) {
 //		$videos = $this->videoRepository->findAll();
 		$playlists = $this->playlistRepository->findAll();
                 $this->view->assign('video', $video);

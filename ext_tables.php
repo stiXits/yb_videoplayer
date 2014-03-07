@@ -5,14 +5,14 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
-	'videocontainer',
-	'video'
+	'globalVideoPlayer',
+	'Global Videoplayer'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         $_EXTKEY,
-        'videolistcontainer',
-        'playlist'
+        'videoListContainer',
+        'Videolist'
 );
 
 $extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
