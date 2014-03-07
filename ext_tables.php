@@ -11,6 +11,12 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         $_EXTKEY,
+        'localVideoPlayer',
+        'Local Videoplayer'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+        $_EXTKEY,
         'videoListContainer',
         'Videolist'
 );
@@ -24,6 +30,12 @@ $extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
 $pluginSignature = strtolower($extensionName) . '_globalvideoplayer';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:'.$_EXTKEY.'/Configuration/FlexForm/Video/GlobalVideoPlayer.xml');
+
+$extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
+$pluginSignature = strtolower($extensionName) . '_localvideoplayer';
+$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:'.$_EXTKEY.'/Configuration/FlexForm/Video/LocalVideoPlayer.xml');
+
 
 if (TYPO3_MODE === 'BE') {
 
