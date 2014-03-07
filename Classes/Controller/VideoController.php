@@ -51,17 +51,47 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         protected $playlistRepository;
 
 	/**
-	 * action show
+	 * displays a given video 
 	 *
 	 * @param  \TYPO3\YbVideoplayer\Domain\Model\Video $video
 	 * @return void
 	 */
 	public function showGlobalPlayerAction($video) {
-//		$videos = $this->videoRepository->findAll();
-		$playlists = $this->playlistRepository->findAll();
+		//fetch playlists from settings
+                $playlistsFromSettings = explode(',', $this->settings['playlists']);
+                $playlists = array();
+                //cummulate all assigned playlists to one
+                foreach($playlistsFromSettings as &$playlist)
+                {
+                        array_push($playlists, $this->playlistRepository->findByUid($playlist));
+                }
+
                 $this->view->assign('video', $video);
-		$this->view->assign('playlist', $playlists[0]);
+		$this->view->assign('playlists', $playlists);
 	}
+
+        /**
+         * shows a video set in the plugins settings
+         *
+         * @return void
+         */
+        public function showLocalPlayerAction() {
+		//fetch playlists from settings
+                $playlistsFromSettings = explode(',', $this->settings['playlists']);
+                $playlists = array();
+                //cummulate all assigned playlists to one
+                foreach($playlistsFromSettings as &$playlist)
+                {
+                        array_push($playlists, $this->playlistRepository->findByUid($playlist));
+                }
+
+
+		//fetch video from settings
+		$video = $this->videoRepository->findByUid($this->settings['localVideo']);
+
+                $this->view->assign('video', $video);
+                $this->view->assign('playlists', $playlists);
+        }
 
 }
 ?>

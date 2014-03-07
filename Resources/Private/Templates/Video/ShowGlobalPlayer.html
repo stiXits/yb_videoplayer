@@ -16,6 +16,8 @@
 
 	<div class="flowplayer fixed-controls play-button color-light" style="background-image: url({video.preview.originalResource.publicUrl});" data-ratio="-0.5" data-embed="false">
 		<f:render partial="Video/VideoContainer" arguments="{video: video}"/>
-		<f:render partial="Playlist/PlaylistContainer" arguments="{playlist: playlist}"/>
+		<f:for each="{playlists}" as="playlist" iteration="itemIteration">
+			<f:render partial="Playlist/PlaylistContainer" arguments="{playlist: playlist}"/>
+		</f:for>
 	</div>
 </f:section>
