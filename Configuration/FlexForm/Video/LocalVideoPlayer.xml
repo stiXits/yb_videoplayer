@@ -19,9 +19,19 @@
                        </TCEforms>
                 </settings.playlists>
 
+		<settings.useFirstFromPlaylist>
+                        <TCEforms>
+                                <label>Just show first Video from Playlist</label>
+                                <config>
+                                        <type>check</type>
+                               </config>
+                       </TCEforms>
+		</settings.useFirstFromPlaylist>
+
                 <settings.localVideo>
                         <TCEforms>
-                                <label>Local Video to be shown</label>
+				<displayCond>FIELD:settings.useFirstFromPlaylist:=:0</displayCond>
+                                <label>Or choose a custom local video</label>
                                 <config>
                                         <type>group</type>
                                         <internal_type>db</internal_type>

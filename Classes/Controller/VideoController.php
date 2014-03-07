@@ -85,9 +85,16 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                         array_push($playlists, $this->playlistRepository->findByUid($playlist));
                 }
 
-
-		//fetch video from settings
-		$video = $this->videoRepository->findByUid($this->settings['localVideo']);
+		$video = 0;
+		if($this->settings['useFirstFromPlaylist'] === '1')
+		{
+			$video = $playlists[0]->getVideos()->current();
+		}
+		else
+		{
+			//fetch video from settings
+			$video = $this->videoRepository->findByUid($this->settings['localVideo']);
+		}
 
                 $this->view->assign('video', $video);
                 $this->view->assign('playlists', $playlists);
