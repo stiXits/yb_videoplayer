@@ -1,7 +1,9 @@
 <f:layout name="Default" />
 <f:section name="main">
 <f:flashMessages />
-	<p>Videolist</p>
+	<h2>Videolists</h2>
+	 <f:for each="{videolists}" as="videolist">
 	        <f:render partial="Playlist/VideolistContainer" arguments="{videolist: videolist}"/>
+	</f:for>
 </f:section>
 

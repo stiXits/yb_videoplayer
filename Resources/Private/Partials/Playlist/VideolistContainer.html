@@ -1,4 +1,5 @@
 <div class="yb_videolist">
+	<h3>{videolist.title}</h3>
         <f:for each="{videolist.videos}" as="video" iteration="itemIteration">
                 <f:link.action pageUid="1342"  action="show" controller="Video" arguments="{video: video}">
                         <img style="height:100px;" src="{video.preview.originalResource.publicUrl}">
