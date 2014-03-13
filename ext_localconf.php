@@ -38,5 +38,9 @@ if (!defined('TYPO3_MODE')) {
         )
 );
 
-
+$TYPO3_CONF_VARS['SYS']['fal']['registeredDrivers']['NFS'] = array(
+        'class' => 'TYPO3\YbVideoplayer\Resource\Driver\NFSDriver',
+        'label' => 'NFS',
+        'flexFormDS' => 'FILE:EXT:yb_videoplayer/Configuration/FlexForm/NFSDriverFlexForm.xml'
+);
 ?>
