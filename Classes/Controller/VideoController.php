@@ -59,7 +59,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	public function showGlobalPlayerAction($video) {
 		//fetch playlists from settings
                 $playlistsFromSettings = explode(',', $this->settings['playlists']);
-                $playlists = array();
+		$playlists = array();
                 //cummulate all assigned playlists to one
                 foreach($playlistsFromSettings as &$playlist)
                 {
@@ -79,6 +79,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		//fetch playlists from settings
                 $playlistsFromSettings = explode(',', $this->settings['playlists']);
                 $playlists = array();
+                \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings['playlists'], 'Playlists');
                 //cummulate all assigned playlists to one
                 foreach($playlistsFromSettings as &$playlist)
                 {

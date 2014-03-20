@@ -1,0 +1,6 @@
+# cat=basic; type=string; label=Interner Pfad zum Videowurzelverzeichnis auf dem Streamingserver (üblicherweise ein Netzwerk-Mount)
+streamingServerInternLocation = ;
+
+# cat=basic; type=string; label=Öffentlich erreichbarer Pfad zum Videowurzelverzeichnis des Streamingservers
+streamingServerExternLocation = ;
+

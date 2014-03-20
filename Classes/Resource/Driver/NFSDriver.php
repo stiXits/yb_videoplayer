@@ -1,7 +1,7 @@
 <?php
 namespace TYPO3\YbVideoplayer\Resource\Driver;
 
-use TYPO3\CMS\Core\Utility\PathUtility;
+//use TYPO3\CMS\Core\Utility\PathUtility;
 /**
  * Driver for a mounted nfs share
  *
@@ -16,13 +16,8 @@ class NFSDriver extends \TYPO3\CMS\Core\Resource\Driver\LocalDriver
 	 * 
 	 * @var string
 	 */
-	protected $publicMountPath;
-
 	public function getPublicUrl(\TYPO3\CMS\Core\Resource\ResourceInterface $fileOrFolder, $relativeToCurrentScript = FALSE) {
-		$publicUrl =  PathUtility::getRelativePathTo(PathUtility::dirname((PATH_site . $publicUrl))) . PathUtility::basename($publicUrl);
-		//todo: replace the mounts absolute path with the mounts publicMountPath
-		$this->absoluteBasePath;
-		$this->publicMountPath;
+		$publicUrl = rtrim($this->configuration['publicPath'], '/') . '/' . ltrim($fileOrFolder->getIdentifier(), '/');
 		return $publicUrl;
 	}
 }
