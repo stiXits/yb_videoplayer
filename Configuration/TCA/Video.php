@@ -6,7 +6,7 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_ybvideoplayer_domain_model_video'] = array (
         'ctrl' => $TCA['tx_ybvideoplayer_domain_model_video']['ctrl'],
         'interface' => array (
-                'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,starttime,endtime,title,description,preview,subtitle,endscreen,tag,file'
+                'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,starttime,endtime,title,description,preview,subtitle,endscreen,file'
         ),
         'feInterface' => $TCA['tx_ybvideoplayer_domain_model_video']['feInterface'],
         'columns' => array (
@@ -142,45 +142,9 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                                 ),
                         ), 'srt'),
                 ),
-               'tag' => array(
-                        'exclude' => 0,
-                        'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.tag',
-                        'config' => array(
-                                'type' => 'select',
-                                'foreign_table' => 'tx_ybvideoplayer_domain_model_video',
-                                'MM' => 'tx_ybvideoplayer_video_tag_mm',
-                                'size' => 10,
-                                'autoSizeMax' => 30,
-                                'maxitems' => 9999,
-                                'multiple' => 0,
-                                'wizards' => array(
-                                        '_PADDING' => 1,
-                                        '_VERTICAL' => 1,
-                                        'edit' => array(
-                                                'type' => 'popup',
-                                                'title' => 'Edit',
-                                                'script' => 'wizard_edit.php',
-                                                'icon' => 'edit2.gif',
-                                                'popup_onlyOpenIfSelected' => 1,
-                                                'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-                                                ),
-                                        'add' => Array(
-                                                'type' => 'script',
-                                                'title' => 'Create new',
-                                                'icon' => 'add.gif',
-                                                'params' => array(
-                                                        'table' => 'tx_ybvideoplayer_domain_model_video',
-                                                        'pid' => '###CURRENT_PID###',
-                                                        'setValue' => 'prepend'
-                                                        ),
-                                                'script' => 'wizard_add.php',
-                                        ),
-                                ),
-                        ),
-                ),
 	),
        'types' => array (
-                '0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title;;;;2-2-2, description;;;richtext[]:rte_transform[mode=ts_css];3-3-3, preview, subtitle, file, tag')
+                '0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title;;;;2-2-2, description;;;richtext[]:rte_transform[mode=ts_css];3-3-3, preview, subtitle, file')
         ),
         'palettes' => array (
                 '1' => array('showitem' => 'starttime, endtime')
