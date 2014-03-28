@@ -34,11 +34,6 @@ namespace TYPO3\YbVideoplayer\Domain\Repository;
  */
 class VideoRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
-	/**
-	 * @var \TYPO3\YbVideoplayer\Domain\Repository\TagRepository
-	 * @inject
-	*/
-	protected $tagRepository;
 
 	public function initializeObject() {
 		$querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
@@ -52,32 +47,6 @@ class VideoRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $query->execute();
 	}
 
-	/*
-	 *@var array of strings
-	 */
-	public function findAllByTags($tagnames)
-	{
-		$query = $this->createQuery();
-		$query->matching($query->in('title', $tagnames));
-		$tags = $query->execute();
-
-		$videos = $this->findAllbyTags($tags);
-		return $videos;
-	}
-
-	/*
-	 * returns all Videos mentioned by one tag that can be found by title
-	 * @var string $tagName
-	*/
-	public function findAllByTagTitle($tags)
-	{
-		$query = $this->createQuery();
-
-		//prepare query to find all videos matching to the given tags
-		$query->matching($query->in('tag', $tags));
-		$videos = $query->execute();
-		return $videos;				
-	}
 
 	public function findByPlaylist($playlist)
 	{

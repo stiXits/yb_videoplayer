@@ -79,13 +79,6 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $title;
 
 	/**
-	 * tag to categorize the video
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag>
-	 */
-	protected $tag;
-
-	/**
 	 * Returns the file
 	 *
 	 * @return @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $file
@@ -201,57 +194,6 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->title = $title;
 	}
 
-	/**
-	 * Adds a tag
-	 *
-	 * @param \TYPO3\YbVideoplayer\Domain\Model\Tag $tag
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> tag
-	 */
-	public function addTag($tag) {
-		$this->tag->attach($tag);
-	}
-
-	/**
-	 * Removes a tag
-	 *
-	 * @param \TYPO3\YbVideoplayer\Domain\Model\Tag $tagToRemove The Tag to be removed
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> tag
-	 */
-	public function removeTag($tagToRemove) {
-		$this->tag->detach($tagToRemove);
-	}
-
-	/**
-	 * Returns the tag
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> tag
-	 */
-	public function getTag() {
-		return $this->tag;
-	}
-
-	/**
-	 * Sets the tags
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> $tags
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Tag> tags
-	 */
-	public function setTag(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $tags) {
-		$this->tag = $tags;
-	}
-
-	/**
-	 * returns the public URL, if the url contains the streaminserver path, it is replaced by its public path
-	 * @return string
-	 */
-/*	public function getPublicURL()
-	{
-		$this->extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
-		$streamingServerInternLocation = $this->extConf['streamingServerInternLocation'];
-		$streamingServerExternLocation = $this->extConf['streamingServerExternLocation'];
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(array($streamingServerInternLocation, $streamingServerExternLocation, $this->file->getOriginalResource()->getPublicUrl()));		
-		return $this->file->getOriginalResource()->getPublicUrl();
-	}*/
 }
 ?>
 

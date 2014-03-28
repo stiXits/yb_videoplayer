@@ -163,53 +163,6 @@ class VideoTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getTag()
 		);
 	}
-
-	/**
-	 * @test
-	 */
-	public function setTagForObjectStorageContainingTagSetsTag() { 
-		$tag = new \TYPO3\YbVideoplayer\Domain\Model\Tag();
-		$objectStorageHoldingExactlyOneTag = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
-		$objectStorageHoldingExactlyOneTag->attach($tag);
-		$this->fixture->setTag($objectStorageHoldingExactlyOneTag);
-
-		$this->assertSame(
-			$objectStorageHoldingExactlyOneTag,
-			$this->fixture->getTag()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function addTagToObjectStorageHoldingTag() {
-		$tag = new \TYPO3\YbVideoplayer\Domain\Model\Tag();
-		$objectStorageHoldingExactlyOneTag = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
-		$objectStorageHoldingExactlyOneTag->attach($tag);
-		$this->fixture->addTag($tag);
-
-		$this->assertEquals(
-			$objectStorageHoldingExactlyOneTag,
-			$this->fixture->getTag()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function removeTagFromObjectStorageHoldingTag() {
-		$tag = new \TYPO3\YbVideoplayer\Domain\Model\Tag();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
-		$localObjectStorage->attach($tag);
-		$localObjectStorage->detach($tag);
-		$this->fixture->addTag($tag);
-		$this->fixture->removeTag($tag);
-
-		$this->assertEquals(
-			$localObjectStorage,
-			$this->fixture->getTag()
-		);
-	}
 	
 }
 ?>
