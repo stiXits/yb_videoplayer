@@ -12,6 +12,7 @@ plugin.tx_ybvideoplayer {
 		layoutRootPath = {$plugin.tx_ybvideoplayer.view.layoutRootPath}
 	}
 	features {
+		skipDefaultArguments = 1
 		# uncomment the following line to enable the new Property Mapper.
 		# rewrittenPropertyMapper = 1
 	}
