@@ -66,6 +66,10 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                         array_push($playlists, $this->playlistRepository->findByUid($playlist));
                 }
 
+		$_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
+		$flowplayerLicenseKey = $_extConfig['flowplayerLicenseKey'];
+
+		$this->view->assign('flowplayerLicenseKey', $flowplayerLicenseKey);
                 $this->view->assign('video', $video);
 		$this->view->assign('playlists', $playlists);
 	}
