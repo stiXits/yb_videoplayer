@@ -43,9 +43,9 @@ if (TYPO3_MODE === 'BE') {
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
     $_EXTKEY,
-    tx_ybvideoplayer_domain_model_video,
+    'tx_ybvideoplayer_domain_model_video',
     'categories',
-    array()
+    $options = array()
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Videoplayer');
@@ -55,7 +55,7 @@ if (TYPO3_MODE === 'BE') {
 $TCA['tx_ybvideoplayer_domain_model_playlist'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_playlist',
-		'label' => 'description',
+		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
@@ -83,7 +83,7 @@ $TCA['tx_ybvideoplayer_domain_model_playlist'] = array(
 $TCA['tx_ybvideoplayer_domain_model_video'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video',
-		'label' => 'description',
+		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',

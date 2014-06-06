@@ -1,9 +1,15 @@
 <f:layout name="Default" />
 <f:section name="main">
 <f:flashMessages />
-	<h2>Videolists</h2>
 	 <f:for each="{videolists}" as="videolist">
-	        <f:render partial="Playlist/VideolistContainer" arguments="{videolist: videolist}"/>
+		<div class="mSlider">
+			<h2>{videolist.description}</h2>
+		<span data-dir='+' class="slLeft">&nbsp;</span>
+	    <f:render partial="Playlist/VideolistContainer" arguments="{videolist: videolist}"/>
+		<span data-dir='-' class="slRight">&nbsp;</span>
+		<div class="clear"></div>
+		</div>
 	</f:for>
+	<div class="clear"></div>
 </f:section>
 

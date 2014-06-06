@@ -1,4 +1,4 @@
-<div class="flowplayer fixed-controls play-button color-light" style="background-image: url({video.preview.originalResource.publicUrl});" data-embed="false" data-key="{flowplayerLicenseKey}">
+<div class="flowplayer fixed-controls" style="background-image: url({video.preview.originalResource.publicUrl});" data-embed="false" data-key="{flowplayerLicenseKey}">
 	<f:render partial="Video/VideoContainer" arguments="{video: video}"/>
 	<f:for each="{playlists}" as="playlist" iteration="itemIteration">
 		<f:render partial="Playlist/PlaylistContainer" arguments="{playlist: playlist}"/>
