@@ -2,6 +2,7 @@
 <f:section name="main">
 <f:flashMessages />
 
+<h1>{video.title}<h2>
 <![CDATA[
                         <style>
                           /* custom player skin 
@@ -14,5 +15,6 @@
 ]]>
 
 <f:render partial="Video/Player" arguments="{video: video, playlists: playlists, flowplayerLicenseKey: flowplayerLicenseKey}"/>
+<f:render partial="Video/VideoDetailsContainer" arguments="{video: video}"/>
 
 </f:section>

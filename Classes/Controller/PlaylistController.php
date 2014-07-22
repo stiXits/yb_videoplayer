@@ -70,5 +70,20 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$this->view->assign('playlist', $playlist);
 	}
 
+	/**
+	* @param \TYPO3\CMS\Extbase\Mvc\RequestInterface $request
+	* @param \TYPO3\CMS\Extbase\Mvc\ResponseInterface $response
+	* @throws \Exception|\TYPO3\CMS\Extbase\Property\Exception
+	*/
+	public function processRequest(\TYPO3\CMS\Extbase\Mvc\RequestInterface $request, \TYPO3\CMS\Extbase\Mvc\ResponseInterface $response) {
+	    try {
+	        parent::processRequest($request, $response);
+	    }
+	    catch(\TYPO3\CMS\Extbase\Exception $e) {
+	            $GLOBALS['TSFE']->pageNotFoundAndExit('');
+	    }
+}
+
+
 }
 ?>
