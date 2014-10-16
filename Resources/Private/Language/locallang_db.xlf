@@ -26,6 +26,10 @@
 			<trans-unit id="tx_ybvideoplayer_domain_model_video.description">
 				<source>Description</source>
 			</trans-unit>
+                        <trans-unit id="tx_ybvideoplayer_domain_model_video.fullnameidentifier">
+                                <source>Hash of File-identifier</source>
+                        </trans-unit>
+
 			<trans-unit id="tx_ybvideoplayer_domain_model_video.preview">
 				<source>Preview</source>
 			</trans-unit>
