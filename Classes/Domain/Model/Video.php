@@ -147,10 +147,9 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return void
 	 */
 	public function setFile($file) {
-		$this->filerefSet = true;
 		$this->file = $file;
-		$this->setFullnameidentifier(sha1($file->getIdentifier());
-		\t3lib_div::devLog('set file:', 'yb_videoplayer', 1, array($file->getIdentifier()));
+		//$this->setFullnameidentifier(sha1($file->getIdentifier());
+		//\t3lib_div::devLog('set file:', 'yb_videoplayer', 1, array($file->getIdentifier()));
 	}
 
 	/**
@@ -255,7 +254,7 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
          * @return void
          */
         public function setFullnameidentifier($fullnameidentifier) {
-                $this->fullnameidentifier = fullnameidentifier;
+                $this->fullnameidentifier = $fullnameidentifier;
         }
 
 
