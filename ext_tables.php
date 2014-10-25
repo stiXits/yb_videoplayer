@@ -48,8 +48,6 @@ if (TYPO3_MODE === 'BE') {
     $options = array()
 );
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Videoplayer');
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_ybvideoplayer_domain_model_playlist', 'EXT:yb_videoplayer/Resources/Private/Language/locallang_csh_tx_ybvideoplayer_domain_model_playlist.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_ybvideoplayer_domain_model_playlist');
 $TCA['tx_ybvideoplayer_domain_model_playlist'] = array(
@@ -105,4 +103,6 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_ybvideoplayer_domain_model_video.gif'
 	),
 );
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Videoplayer');
 ?>

@@ -25,6 +25,39 @@
 	         */
 	        protected $videoRepository;
 
+    		/**
+		*/
+   		protected $configurationManager;
+
+
+		/**
+		 * Storage Reository to find filestorages
+		 */
+		protected $storageRepository;
+
+		/**
+		 * Uitlity to instantiate objects, injection does not function with all objects in commandcontrollers
+		 */
+                protected $objectManager;
+
+		/**
+		 * Utility to persist Domain Objects before the end of the commandcontroller task
+		 */
+		protected $persistenceManager;
+
+		/**
+		 * initializes Objects that can't be injected
+		 */
+   		function __construct() {
+			\t3lib_div::devLog('constructor called', 'yb_videoplayer', 1, array());
+			$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\\TYPO3\\CMS\\ExtBase\\Object\\ObjectManager');
+                        $this->storageRepository = $this->objectManager->get('TYPO3\\CMS\\Core\\Resource\\StorageRepository');
+			$this->persistenceManager = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager');
+
+			$this->configurationManager = $this->objectManager->get('\TYPO3\CMS\Extbase\Configuration\ConfigurationManager');
+
+   		}
+
                 /**
                 * queries formulardata from the database
                 * @param string $folder
@@ -34,9 +67,7 @@
                 public function ImportFromFilesCommand($folder, $destinationPid, $creatorUid)
                 {
 			\t3lib_div::devLog('entered command', 'yb_videoplayer', 1, array($folder, $destinationPid, $creatorUid));
-
-			$storageRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\StorageRepository');
-			$storage = $storageRepository->findByUid(1);
+			$storage = $this->storageRepository->findByUid(1);
 			
 			if(!$storage->hasFolder($folder))
 			{
@@ -45,18 +76,36 @@
 			}
 			
 			//use getFilesInFolder when migrating to 6.2
-			$files = $storage->getFileList($folder);
-			\t3lib_div::devLog('loaded files:', 'yb_videoplayer', 1, $files);
-
+			$videoFiles = $storage->getFileList($folder);
 			$videos = array();
+			\t3lib_div::devLog('loaded files:', 'yb_videoplayer', 1, $videoFiles);
 
-			foreach($files as $file)
+			foreach($videoFiles as &$videoFile)
 			{
-				$file = $storage->getFile($file['identifier']);
-				$videos[] = $this->createVideoFromFile($file);
-			}
+				$videoFile = $storage->getFile($videoFile['identifier']);
+				
+				try
+				{
+					$video = $this->createVideoFromFile($videoFile);
+				}
+                                catch(\Exception $e)
+                                {
+                                        \t3lib_div::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
+					\t3lib_div::devLog('loaded files:', 'yb_videoplayer', 1, array($videoFiles));
+					throw new \Exception();
+                                }
 
-			\t3lib_div::devLog('created videos:', 'yb_videoplayer', 1, $videos);
+				$video->setPid($destinationPid);
+				$this->videoRepository->add($video);
+				$videos[] = $video;
+			}
+			$this->persistenceManager->persistAll();
+
+			\t3lib_div::devLog('loaded files:', 'yb_videoplayer', 1, $videoFiles);
+
+			$this->applyVideoFiles($videos, $videoFiles);
+
+			\t3lib_div::devLog('video UID:', 'yb_videoplayer', 1, array($videos[0]->getTitle(), $videos[0]->getUid()));
 		}
 
 		/* creates Videorecord from a given file
@@ -76,12 +125,36 @@
 				return $video;
 			}
 			
-			$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\\TYPO3\\CMS\\ExtBase\\Object\\ObjectManager');
-			$propertyMapper = $objectManager->get('\\TYPO3\\CMS\\ExtBase\\Property\\PropertyMapper');
+			$video = $this->objectManager->get('\TYPO3\YbVideoplayer\Domain\Model\Video');
+			$video->setTitle($file->getName());
 
-			$properties = array('title' => $file->getTitle, 'file' => 16000);
-			$video = $propertyMapper->convert($properties, 'TYPO3\YbVideoplayer\Domain\Model\Video');
 			return $video;
 		}
+
+                /* Creates Filereferences to the files and assignes them to the videorecord
+                * @param array $videos
+                * @return \TYPO3\YbVideoplayer\Domain\Model\Video
+                */
+                protected function applyVideoFiles($videos, $videoFiles)
+                {
+			foreach($videos as $key => &$video)
+			{
+	                        $fileRef = $this->objectManager->get('\TYPO3\YbVideoplayer\Domain\Model\FileReference');
+
+	                        try
+	                        {
+	                                $fileRef->setOriginalResource($video, $videoFiles[$video->getTitle()]);
+	                                $video->setFile($fileRef);
+					$video->setFullnameidentifier(sha1($fileRef->getOriginalResource()->getIdentifier()));
+					$this->videoRepository->update($video);
+					$this->persistenceManager->persistAll();
+	                        }
+	                        catch(\Exception $e)
+	                        {
+	                                \t3lib_div::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
+	                        }
+			}
+		}
+
 	}
 ?>

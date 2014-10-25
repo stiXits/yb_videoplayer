@@ -47,10 +47,23 @@ plugin.tx_ybvideoplayer._CSS_DEFAULT_STYLE (
 module.tx_ybvideoplayer {
 	persistence {
 		storagePid = {$module.tx_ybvideoplayer.persistence.storagePid}
+	
+	        classes {
+	                TYPO3\YbVideoplayer\Domain\Model\FileReference {
+	                        mapping {
+	                                tableName = sys_file_reference
+	                                columns {
+	                                        uid_local.mapOnProperty = uidLocal
+	                                }
+	                       }
+	                }
+	       }
 	}
+
 	view {
 		templateRootPath = {$module.tx_ybvideoplayer.view.templateRootPath}
 		partialRootPath = {$module.tx_ybvideoplayer.view.partialRootPath}
 		layoutRootPath = {$module.tx_ybvideoplayer.view.layoutRootPath}
 	}
+
 }
