@@ -1,0 +1,16 @@
+config.tx_extbase {
+	persistence {
+		classes {
+			TYPO3\YbVideoplayer\Domain\Model\FileReference {
+				mapping {
+					tableName = sys_file_reference
+					columns {
+						uid_local.mapOnProperty = uidLocal
+						table_local.mapOnProperty = tableLocal
+						tablenames.mapOnProperty = tablenames
+					}
+				}
+			}
+		}
+	}
+}

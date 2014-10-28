@@ -54,6 +54,8 @@ module.tx_ybvideoplayer {
 	                                tableName = sys_file_reference
 	                                columns {
 	                                        uid_local.mapOnProperty = uidLocal
+                                                table_local.mapOnProperty = tableLocal
+                                                tablenames.mapOnProperty = tablenames
 	                                }
 	                       }
 	                }
