@@ -12,8 +12,9 @@ class SetFullnameIdentIfierHook{
 
 			if($video->getFile())
 			{
-				$persistenceManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');
-				$video->setFullnameIdentifier(sha1($video->getFile()->getOriginalResource()->getIdentifier()));
+				$persistenceManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');	
+				$prefixFreeIdentifier = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($video->getFile()->getOriginalResource())['identifier'];
+				$video->setFullnameIdentifier(sha1($prefixFreeIdentifier));
 				$videoRepository->update($video);
 				$persistenceManager->persistAll();
 			}

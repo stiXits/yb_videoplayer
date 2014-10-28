@@ -53,7 +53,6 @@
 			$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\\TYPO3\\CMS\\ExtBase\\Object\\ObjectManager');
                         $this->storageRepository = $this->objectManager->get('TYPO3\\CMS\\Core\\Resource\\StorageRepository');
 			$this->persistenceManager = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager');
-
 			$this->configurationManager = $this->objectManager->get('\TYPO3\CMS\Extbase\Configuration\ConfigurationManager');
 
    		}
@@ -145,7 +144,8 @@
 	                        {
 	                                $fileRef->setOriginalResource($video, $videoFiles[$video->getTitle()]);
 	                                $video->setFile($fileRef);
-					$video->setFullnameidentifier(sha1($fileRef->getOriginalResource()->getIdentifier()));
+					$prefixFreeIdentifier = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($fileRef->getOriginalResource())['identifier'];
+					$video->setFullnameidentifier(sha1($prefixFreeIdentifier));
 					$this->videoRepository->update($video);
 					$this->persistenceManager->persistAll();
 	                        }
