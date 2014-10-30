@@ -20,8 +20,8 @@
 			<trans-unit id="tx_ybvideoplayer_domain_model_video">
 				<source>Video</source>
 			</trans-unit>
-			<trans-unit id="tx_ybvideoplayer_domain_model_video.file">
-				<source>File</source>
+			<trans-unit id="tx_ybvideoplayer_domain_model_video.files">
+				<source>Files</source>
 			</trans-unit>
 			<trans-unit id="tx_ybvideoplayer_domain_model_video.description">
 				<source>Description</source>

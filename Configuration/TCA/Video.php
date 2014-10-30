@@ -6,7 +6,7 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_ybvideoplayer_domain_model_video'] = array (
         'ctrl' => $TCA['tx_ybvideoplayer_domain_model_video']['ctrl'],
         'interface' => array (
-                'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,starttime,endtime,title,description,preview,subtitle,endscreen,file, fullnameidentifier'
+                'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,starttime,endtime,title,description,preview,subtitle,endscreen,files, fullnameidentifier'
         ),
         'feInterface' => $TCA['tx_ybvideoplayer_domain_model_video']['feInterface'],
         'columns' => array (
@@ -77,10 +77,10 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                                 )
                         )
                 ),
-                'file' => array(
+                'files' => array(
                         'exclude' => 0,
-                        'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.file',
-			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('file', array(
+                        'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.files',
+			'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('files', array(
                	        	'appearance' => array(
                                 'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
                         	),
@@ -154,7 +154,7 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                 ),
 	),
        'types' => array (
-                '0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title;;;;2-2-2, description;;;richtext[]:rte_transform[mode=ts_css];3-3-3, preview, subtitle, file, fullnameidentifier')
+                '0' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title;;;;2-2-2, description;;;richtext[]:rte_transform[mode=ts_css];3-3-3, preview, subtitle, files, fullnameidentifier')
         ),
         'palettes' => array (
                 '1' => array('showitem' => 'starttime, endtime')

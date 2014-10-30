@@ -48,7 +48,7 @@ CREATE TABLE tx_ybvideoplayer_domain_model_video (
         uid int(11) NOT NULL auto_increment,
         pid int(11) DEFAULT '0' NOT NULL,
 
-	file varchar(255)  NOT NULL,
+	files varchar(255)  NOT NULL,
 	fullnameidentifier varchar(40) NOT NULL,
 	description text NOT NULL,
 	preview varchar(255) DEFAULT '' NOT NULL,
