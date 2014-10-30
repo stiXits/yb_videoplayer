@@ -37,7 +37,7 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * videofiles
 	 *
-	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
 	 * @validate NotEmpty
 	 */
 	protected $files;
@@ -52,7 +52,7 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * preview image
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\CMS\Extbase\Domain\Model\FileReference>
+	 * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
 	 */
 	protected $preview;
 
