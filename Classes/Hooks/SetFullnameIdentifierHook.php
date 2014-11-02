@@ -4,7 +4,11 @@ class SetFullnameIdentIfierHook{
 
 	//function processDatamap_afterDatabaseOperations($status, $table, $id, &$fieldArray, &$pObj){
 		function processDatamap_afterAllOperations(&$pObj){
-		//if($table == 'tx_ybvideoplayer_domain_model_video')
+
+		$datamap = $pObj->datamap['tx_ybvideoplayer_domain_model_video'];
+
+		//check if operating on a video object
+		if($datamap)
 		{
 			//not the fastest possibility, TODO: get identifier from and set hash to mysql table#	
 			$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\\TYPO3\\CMS\\ExtBase\\Object\\ObjectManager');
