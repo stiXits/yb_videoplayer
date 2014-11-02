@@ -117,7 +117,7 @@
 			\t3lib_div::devLog('creating video record for:', 'yb_videoplayer', 1, array($file->getName(), $file->getUid()));
 
 			//check if file is allready imported
-			$video = $this->videoRepository->findByfullnameidentifier(sha1($file->getIdentifier()))->getFirst();
+			$video = $this->videoRepository->findByfullnameidentifier($file->getIdentifier())->getFirst();
 			if($video)
 			{
 				\t3lib_div::devLog('video allready migrated:', 'yb_videoplayer', 1, array('title' => $video->getTitle(), 'uid' => $video->getUid()));
@@ -145,7 +145,7 @@
 					$identifier  = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($videoFiles[$video->getTitle()]);
 	                                $fileRef->setOriginalResource($video, $videoFiles[$video->getTitle()], $identifier['prefix']);
 	                                $video->addFile($fileRef);
-					$video->setFullnameidentifier(sha1($identifier['identifier']));
+					$video->setFullnameidentifier($identifier['identifier']);
 					$this->videoRepository->update($video);
 					$this->persistenceManager->persistAll();
 	                        }

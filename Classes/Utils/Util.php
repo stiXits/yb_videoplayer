@@ -60,9 +60,10 @@ class Util
 		{
 			$prefix = $stringParts[0];
 			array_shift($stringParts);
-			$prefixFreeName = implode("_", $stringParts);
+			$prefixFreeName = implode($seperator, $stringParts);
+			return array('prefix' => $prefix, 'identifier' => $namelessIdentifier . $prefixFreeName);
 		}
-		return array('prefix' => $prefix, 'identifier' => $namelessIdentifier . $prefixFreeName);
+		return array('prefix' => '', 'identifier' => $file->getIdentifier());
 	}
 }
 

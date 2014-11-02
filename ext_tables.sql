@@ -49,7 +49,7 @@ CREATE TABLE tx_ybvideoplayer_domain_model_video (
         pid int(11) DEFAULT '0' NOT NULL,
 
 	files varchar(255)  NOT NULL,
-	fullnameidentifier varchar(40) NOT NULL,
+	fullnameidentifier varchar(512) NOT NULL,
 	description text NOT NULL,
 	preview varchar(255) DEFAULT '' NOT NULL,
 	endscreen varchar(255) DEFAULT '' NOT NULL,

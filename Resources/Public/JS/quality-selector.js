@@ -101,6 +101,7 @@
                                                                                                       d(playlistItemEl, 'defaultQuality') :
                                                                                                       api.conf.defaultQuality)),
           src = video.src.replace(/(-\d+p)?\.(mp4|webm)$/, isDefaultQuality ? ".$2" : "-" + desiredQuality + ".$2");
+		alert(src);
       if (video.src !== src) {
         ev.preventDefault();
         api.loading = false;
