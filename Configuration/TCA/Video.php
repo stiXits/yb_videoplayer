@@ -131,7 +131,7 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                                 'type' => 'input',
                                 'size' => '40',
                                 'eval' => 'trim',
-				'readOnly' => 1,
+				'readOnly' => 0,
                         )
                 ),
                'endscreen' => array (

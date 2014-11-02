@@ -55,10 +55,13 @@
     api.conf.qualities = api.conf.qualities.split(',');
 
     on(root, 'click', '.fp-quality-selector li', function() {
+	alert(api.video.src);
       var currentTime = api.finished ? 0 : api.video.time,
           quality = $(this).data('quality'),
           isDefaultQuality = quality === api.conf.defaultQuality,
-          src = api.video.src.replace(/(-\d+p)?\.(mp4|webm)$/, isDefaultQuality ? ".$2" : "-" + quality + ".$2");
+         // src = api.video.src.replace(/(-\d+p)?\.(mp4|webm)$/, isDefaultQuality ? ".$2" : "-" + quality + ".$2");
+	src = api.video.src.replace(/\.*([a-zA-Z_]*.(mp4|webm))$/, isDefaultQuality ? "$1" : quality + "_" + "$1");
+	alert(src);
       api.quality = quality;
       api.load(src, function() {
         //Make sure api is not in finished state anymore
@@ -101,12 +104,11 @@
                                                                                                       d(playlistItemEl, 'defaultQuality') :
                                                                                                       api.conf.defaultQuality)),
           src = video.src.replace(/(-\d+p)?\.(mp4|webm)$/, isDefaultQuality ? ".$2" : "-" + desiredQuality + ".$2");
-		alert(src);
-      if (video.src !== src) {
+      /*if (video.src !== src) {
         ev.preventDefault();
         api.loading = false;
         api.load(src);
-      }
+      }*/
     });
     var removeAllQualityClasses = function() {
       forEach(api.conf.qualities, function(quality) {

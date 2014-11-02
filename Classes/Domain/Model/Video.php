@@ -280,6 +280,23 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->title = $title;
 	}
 
+	/**
+	 * returns the public url without resolution prefix
+	 *
+	 * @return string
+	 */
+	public function getPrefixFreePublicUrl()
+	{
+		if($this->files->count() < 1)
+			return "No File found";
+		
+		$fileRef = $this->files->current()->getOriginalResource();
+		$prefixFreePublicUrl = $fileRef->getPublicUrl();
+		$prefixFreePublicUrl = str_replace($fileRef->getIdentifier(), $this->fullnameidentifier, $prefixFreePublicUrl);
+		
+		return $prefixFreePublicUrl;
+	}
+
 }
 ?>
 

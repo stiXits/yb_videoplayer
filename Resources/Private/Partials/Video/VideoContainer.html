@@ -1,5 +1,3 @@
 <video>
-	<f:for each="{video.files}" as="file">
-		<source type="video/mp4" src="{file.originalResource.publicUrl}"/>
-	</f:for>
+		<source type="video/mp4" src="{video.prefixFreePublicUrl}"/>
 </video>
