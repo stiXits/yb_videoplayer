@@ -1,9 +1,8 @@
 page.includeCSS.flowplayerskin = {$plugin.tx_ybvideoplayer.configuration.flowplayerSkinCss}
 page.includeCSS.flowplayerplaylist = {$plugin.tx_ybvideoplayer.configuration.flowplayerPlaylistCss}
+page.includeCSS.flowplayerresolutionscss = {$plugin.tx_ybvideoplayer.configuration.flowplayerResolutionsCss}
 page.includeJS.flowplayermin = {$plugin.tx_ybvideoplayer.configuration.flowplayerJs}
-
-
-
+page.includeJS.flowplayerresolutionsjs = {$plugin.tx_ybvideoplayer.configuration.flowplayerResolutionsJs}
 
 plugin.tx_ybvideoplayer {
 	view {
