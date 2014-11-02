@@ -92,6 +92,10 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
          */
         protected $fullnameidentifier;
 
+	public function __construct() {
+    		$this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+	}
+
 	/**
 	 * Adds a Category
 	 *
@@ -149,6 +153,16 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setFiles($files) {
 		$this->files = $file;
 	}
+
+        /**
+         * add a file
+         *
+         * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $file
+         * @return void
+         */
+        public function addFile($file) {
+                $this->files->attach($file);
+        }
 
 	/**
 	 * Returns the description
