@@ -142,10 +142,10 @@
 
 	                        try
 	                        {
-	                                $fileRef->setOriginalResource($video, $videoFiles[$video->getTitle()]);
+					$identifier  = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($videoFiles[$video->getTitle()]);
+	                                $fileRef->setOriginalResource($video, $videoFiles[$video->getTitle()], $identifier['prefix']);
 	                                $video->setFile($fileRef);
-					$prefixFreeIdentifier = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($fileRef->getOriginalResource())['identifier'];
-					$video->setFullnameidentifier(sha1($prefixFreeIdentifier));
+					$video->setFullnameidentifier(sha1($identifier['identifier']));
 					$this->videoRepository->update($video);
 					$this->persistenceManager->persistAll();
 	                        }

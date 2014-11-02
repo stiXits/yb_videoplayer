@@ -56,6 +56,7 @@ module.tx_ybvideoplayer {
 	                                        uid_local.mapOnProperty = uidLocal
                                                 table_local.mapOnProperty = tableLocal
                                                 tablenames.mapOnProperty = tablenames
+                                                title.mapOnProperty = title
 	                                }
 	                       }
 	                }
