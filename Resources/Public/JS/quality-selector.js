@@ -53,15 +53,20 @@
     };
     if (!api.conf.qualities) return;
     api.conf.qualities = api.conf.qualities.split(',');
+var ui = find(root, '.fp-ui')[0];
+      var selector = createElement('ul', {'class': 'fp-quality-selector'});
+      ui.appendChild(selector);
+
+    forEach(api.conf.qualities, function(q, i) {
+        selector.appendChild(createElement('li', {'data-quality': q, }, q.replace(/[_-]/, '')));
+    });
 
     on(root, 'click', '.fp-quality-selector li', function() {
-	alert(api.video.src);
       var currentTime = api.finished ? 0 : api.video.time,
           quality = $(this).data('quality'),
           isDefaultQuality = quality === api.conf.defaultQuality,
          // src = api.video.src.replace(/(-\d+p)?\.(mp4|webm)$/, isDefaultQuality ? ".$2" : "-" + quality + ".$2");
-	src = api.video.src.replace(/\.*([a-zA-Z_]*.(mp4|webm))$/, isDefaultQuality ? "$1" : quality + "_" + "$1");
-	alert(src);
+	src = api.video.src.replace(/\.*([a-zA-Z_]*.(mp4|webm))$/, isDefaultQuality ? "$1" : quality + "$1");
       api.quality = quality;
       api.load(src, function() {
         //Make sure api is not in finished state anymore
@@ -72,6 +77,7 @@
           });
         }
       });
+      $('.fp-quality-selector li').remove();
     });
     
     var findOptimalQuality = function(previousQuality, newQualities) {
@@ -116,7 +122,7 @@
       });
     };
     api.bind('ready', function(ev, api, video) {
-      var quality = getQualityFromSrc(video.src) || Math.min(video.height, video.width) + 'p';
+      /*var quality = getQualityFromSrc(video.src) || Math.min(video.height, video.width) + 'p';
       removeAllQualityClasses();
       api.quality = quality;
       addClass(root, 'quality-' + quality);
@@ -126,8 +132,8 @@
       var selector = createElement('ul', {'class': 'fp-quality-selector'});
       ui.appendChild(selector);
       forEach(api.conf.qualities, function(q, i) {
-        selector.appendChild(createElement('li', {'data-quality': q, 'class': q == quality ? 'active': ''}, q));
-      });
+        selector.appendChild(createElement('li', {'data-quality': q, 'class': q == quality ? 'active': ''}, q.replace(/[_-]/, '')));
+      });*/
     });
     api.bind('unload', function() {
       removeAllQualityClasses();
