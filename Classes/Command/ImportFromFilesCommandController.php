@@ -58,11 +58,11 @@
    		}
 
                 /**
-                * queries formulardata from the database
-                * @param string $folder
-                * @param int $destinationPid
-		* @param int $creatorUid
-                */
+                 * queries formulardata from the database
+                 * @param string $folder
+                 * @param int $destinationPid
+		 * @param int $creatorUid
+                 */
                 public function ImportFromFilesCommand($folder, $destinationPid, $creatorUid)
                 {
 			$storage = $this->storageRepository->findByUid(1);
@@ -103,11 +103,11 @@
 		}
 
 		/**
-		* creates Videorecord from a given file
-		* @param string $fileName
-		* @param string $identifier
-		* @return \TYPO3\YbVideoplayer\Domain\Model\Video
-		*/
+		 * creates Videorecord from a given file
+		 * @param string $fileName
+		 * @param string $identifier
+		 * @return \TYPO3\YbVideoplayer\Domain\Model\Video
+		 */
 		protected function createVideoFromFile(\TYPO3\CMS\Core\Resource\FileInterface $file)
 		{
 			//check if file is allready imported
@@ -126,9 +126,9 @@
 		}
 
                 /** Creates Filereferences to the files and assignes them to the videorecord
-                * @param array $videos
-                * @return \TYPO3\YbVideoplayer\Domain\Model\Video
-                */
+                 * @param array $videos
+                 * @return \TYPO3\YbVideoplayer\Domain\Model\Video
+                 */
                 protected function applyVideoFiles($videos, $videoFiles)
                 {
 			foreach($videos as $key => &$video)
