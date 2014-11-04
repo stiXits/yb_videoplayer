@@ -65,7 +65,6 @@
                 */
                 public function ImportFromFilesCommand($folder, $destinationPid, $creatorUid)
                 {
-			\t3lib_div::devLog('entered command', 'yb_videoplayer', 1, array($folder, $destinationPid, $creatorUid));
 			$storage = $this->storageRepository->findByUid(1);
 			
 			if(!$storage->hasFolder($folder))
@@ -77,7 +76,6 @@
 			//use getFilesInFolder when migrating to 6.2
 			$videoFiles = $storage->getFileList($folder);
 			$videos = array();
-			\t3lib_div::devLog('loaded files:', 'yb_videoplayer', 1, $videoFiles);
 
 			foreach($videoFiles as &$videoFile)
 			{
@@ -100,27 +98,24 @@
 			}
 			$this->persistenceManager->persistAll();
 
-			\t3lib_div::devLog('loaded files:', 'yb_videoplayer', 1, $videoFiles);
 
 			$this->applyVideoFiles($videos, $videoFiles);
-
-			\t3lib_div::devLog('video UID:', 'yb_videoplayer', 1, array($videos[0]->getTitle(), $videos[0]->getUid()));
 		}
 
-		/* creates Videorecord from a given file
+		/**
+		* creates Videorecord from a given file
 		* @param string $fileName
 		* @param string $identifier
 		* @return \TYPO3\YbVideoplayer\Domain\Model\Video
 		*/
 		protected function createVideoFromFile(\TYPO3\CMS\Core\Resource\FileInterface $file)
 		{
-			\t3lib_div::devLog('creating video record for:', 'yb_videoplayer', 1, array($file->getName(), $file->getUid()));
-
 			//check if file is allready imported
 			$video = $this->videoRepository->findByfullnameidentifier($file->getIdentifier())->getFirst();
 			if($video)
 			{
 				\t3lib_div::devLog('video allready migrated:', 'yb_videoplayer', 1, array('title' => $video->getTitle(), 'uid' => $video->getUid()));
+				
 				return $video;
 			}
 			
@@ -130,7 +125,7 @@
 			return $video;
 		}
 
-                /* Creates Filereferences to the files and assignes them to the videorecord
+                /** Creates Filereferences to the files and assignes them to the videorecord
                 * @param array $videos
                 * @return \TYPO3\YbVideoplayer\Domain\Model\Video
                 */
