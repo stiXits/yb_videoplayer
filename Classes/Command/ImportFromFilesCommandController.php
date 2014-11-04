@@ -49,7 +49,6 @@
 		 * initializes Objects that can't be injected
 		 */
    		function __construct() {
-			\t3lib_div::devLog('constructor called', 'yb_videoplayer', 1, array());
 			$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\\TYPO3\\CMS\\ExtBase\\Object\\ObjectManager');
                         $this->storageRepository = $this->objectManager->get('TYPO3\\CMS\\Core\\Resource\\StorageRepository');
 			$this->persistenceManager = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager');
@@ -127,7 +126,8 @@
 			$video = $this->videoRepository->findByfullnameidentifier($newFileIdentifier['identifier'])->getFirst();
 			if($video)
 			{
-				\t3lib_div::devLog('video allready migrated:', 'yb_videoplayer', 1, array('title' => $video->getTitle(), 'uid' => $video->getUid()));
+				//\t3lib_div::devLog('video allready migrated:', 'yb_videoplayer', 1, array('title' => $video->getTitle(), 'uid' => $video->getUid()));
+				$this->addResolutionToVideo($video, $file);
 				return null;
 			}
 			
@@ -193,10 +193,11 @@
 			$files = $video->getFiles()->toArray();
 			foreach ($files as $key => &$file)
 			{
-				if($resolution->getSha1() == $file->getOriginalResource()->getSha1())
+				if($resolution->getIdentifier() == $file->getOriginalResource()->getIdentifier())
 					return $video;
 			}
 
+			\t3lib_div::devLog('adding resolution to Video:', 'yb_videoplayer', 1, array('video' => $video->getTitle(), 'file' => $file->getOriginalResource()->getIdentifier()));
 			$this->addFileToVideo($video, $resolution);	
 		}
 	}

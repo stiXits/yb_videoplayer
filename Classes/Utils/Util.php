@@ -4,7 +4,7 @@ namespace TYPO3\YbVideoplayer\Utils;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Yannick Bäer <stix@phcn.de>
+ *  (c) 2013 Yannick Bäumer <stix@phcn.de>
  *
  *  All rights reserved
  *
@@ -50,8 +50,8 @@ class Util
                         return $file->getIdentifier();
 
 		// get identifier without name
-		$namelessIdentifier = str_replace($file->getName(), '', $file->getIdentifier);
-		
+		$namelessIdentifier = str_replace($file->getName(), '', $file->getIdentifier());
+
 		// get name without prefix
 		$prefix ='';
 		$prefixFreeName = $file->getName();
