@@ -76,7 +76,9 @@
 			//use getFilesInFolder when migrating to 6.2
 			$videoFiles = $storage->getFileList($folder);
 			$videos = array();
-
+			
+			try
+{
 			foreach($videoFiles as &$videoFile)
 			{
 				$videoFile = $storage->getFile($videoFile['identifier']);
@@ -92,14 +94,24 @@
 					throw new \Exception();
                                 }
 
-				$video->setPid($destinationPid);
-				$this->videoRepository->add($video);
-				$videos[] = $video;
+				if($video != null)
+				{
+					$video->setPid($destinationPid);
+					$this->videoRepository->add($video);
+					$videos[] = $video;
+				}
 			}
 			$this->persistenceManager->persistAll();
 
 
 			$this->applyVideoFiles($videos, $videoFiles);
+}
+                                 catch(\Exception $e)
+                                 {
+                                         \t3lib_div::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
+                                         throw new \Exception();
+                                 }
+
 		}
 
 		/**
@@ -111,12 +123,12 @@
 		protected function createVideoFromFile(\TYPO3\CMS\Core\Resource\FileInterface $file)
 		{
 			//check if file is allready imported
-			$video = $this->videoRepository->findByfullnameidentifier($file->getIdentifier())->getFirst();
+			$newFileIdentifier = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($file);
+			$video = $this->videoRepository->findByfullnameidentifier($newFileIdentifier['identifier'])->getFirst();
 			if($video)
 			{
 				\t3lib_div::devLog('video allready migrated:', 'yb_videoplayer', 1, array('title' => $video->getTitle(), 'uid' => $video->getUid()));
-				
-				return $video;
+				return null;
 			}
 			
 			$video = $this->objectManager->get('\TYPO3\YbVideoplayer\Domain\Model\Video');
@@ -129,27 +141,63 @@
                  * @param array $videos
                  * @return \TYPO3\YbVideoplayer\Domain\Model\Video
                  */
-                protected function applyVideoFiles($videos, $videoFiles)
+                protected function applyVideoFiles(&$videos, &$videoFiles)
                 {
 			foreach($videos as $key => &$video)
 			{
-	                        $fileRef = $this->objectManager->get('\TYPO3\YbVideoplayer\Domain\Model\FileReference');
-
-	                        try
-	                        {
-					$identifier  = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($videoFiles[$video->getTitle()]);
-	                                $fileRef->setOriginalResource($video, $videoFiles[$video->getTitle()], $identifier['prefix']);
-	                                $video->addFile($fileRef);
-					$video->setFullnameidentifier($identifier['identifier']);
-					$this->videoRepository->update($video);
-					$this->persistenceManager->persistAll();
-	                        }
-	                        catch(\Exception $e)
-	                        {
-	                                \t3lib_div::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
-	                        }
+				$this->addFileToVideo($video, $videoFiles[$video->getTitle()]);
 			}
 		}
 
+		/**
+		 * adds a specified file to a specified video object
+		 * TODO: move this functionality to the Video Domain Model
+		 *
+                 * @param \TYPO3\YbVideoplayer\Domain\Model\Video $video
+                 * @param \TYPO3\CMS\Core\Resource\FileInterface $resolution
+		 * @return \TYPO3\YbVideoplayer\Domain\Model\Video
+		 */
+		protected function addFileToVideo(&$video, &$file)
+		{
+                	$fileRef = $this->objectManager->get('\TYPO3\YbVideoplayer\Domain\Model\FileReference');
+
+                        try
+                        {
+                        	$identifier  = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($file);
+                                $fileRef->setOriginalResource($video, $file, $identifier['prefix']);
+                                $video->addFile($fileRef);
+                                $video->setFullnameidentifier($identifier['identifier']);
+                                $this->videoRepository->update($video);
+                                $this->persistenceManager->persistAll();
+                        }
+                        catch(\Exception $e)
+                        {
+                                \t3lib_div::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
+                        }
+			
+			return $video;
+		}
+
+
+		/**
+		 * adds a new resolution, including file, to an existing video
+		 * TODO: move this functionality to the Video Domain Model
+		 *
+		 * @param \TYPO3\YbVideoplayer\Domain\Model\Video $video
+		 * @param \TYPO3\CMS\Core\Resource\FileInterface $resolution
+		 * @return \TYPO3\YbVideoplayer\Domain\Model\Video
+		 */
+		protected function addResolutionToVideo($video, $resolution)
+		{
+			// check if file allready exists
+			$files = $video->getFiles()->toArray();
+			foreach ($files as $key => &$file)
+			{
+				if($resolution->getSha1() == $file->getOriginalResource()->getSha1())
+					return $video;
+			}
+
+			$this->addFileToVideo($video, $resolution);	
+		}
 	}
 ?>
