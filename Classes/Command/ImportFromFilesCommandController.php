@@ -126,7 +126,7 @@
 			$video = $this->videoRepository->findByfullnameidentifier($newFileIdentifier['identifier'])->getFirst();
 			if($video)
 			{
-				//\t3lib_div::devLog('video allready migrated:', 'yb_videoplayer', 1, array('title' => $video->getTitle(), 'uid' => $video->getUid()));
+				\t3lib_div::devLog('video allready migrated:', 'yb_videoplayer', 1, array('title' => $video->getTitle(), 'uid' => $video->getUid()));
 				$this->addResolutionToVideo($video, $file);
 				return null;
 			}
