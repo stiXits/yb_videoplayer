@@ -45,6 +45,8 @@ class Util
 	{
                 $_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
                 $seperator = $_extConfig['prefixSeperator'];
+		$prefixes = str_replace(',', '|', $_extConfig['prefixes']);
+		
 
                 if($seperator == '')
                         return $file->getIdentifier();
@@ -52,16 +54,14 @@ class Util
 		// get identifier without name
 		$namelessIdentifier = str_replace($file->getName(), '', $file->getIdentifier());
 
-		// get name without prefix
-		$prefix ='';
-		$prefixFreeName = $file->getName();
-                $stringParts = explode($seperator , $prefixFreeName);
-                if(count($stringParts) > 1) 
-		{
-			$prefix = $stringParts[0];
-			array_shift($stringParts);
-			$prefixFreeName = implode($seperator, $stringParts);
-			return array('prefix' => $prefix, 'identifier' => $namelessIdentifier . $prefixFreeName);
+		$pattern = '/(' . $prefixes . ')*\\' . $seperator . '(.*)/';
+		$stringParts = null;
+		preg_match($pattern, $file->getName(), $stringParts);
+
+		//prefix found
+		if($stringParts[1] != '') 
+                {
+			return array('prefix' => $stringParts[1], 'identifier' => $namelessIdentifier . $stringParts[2]);
 		}
 		return array('prefix' => '', 'identifier' => $file->getIdentifier());
 	}

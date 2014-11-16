@@ -1,5 +1,8 @@
 # cat=basic; type=string; label=Flowplayer Lizenskey
 flowplayerLicenseKey = xxxxxxxxxxxxxxxxxxx
 
-# cat=basic; type=string; label=Prefix Seperator for fileimport (to distinguish different quality levels)
+# cat=basic; type=string; label=Prefix Seperator for fileimport (to distinguish different resolution levels)
 prefixSeperator = _
+
+# cat=basic; type=string; label=Resolution Level prefixes (comma seperated, syntax sensitive)
+prefixes = HD,SD,LD
