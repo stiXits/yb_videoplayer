@@ -11,8 +11,8 @@ class SetFullnameIdentIfierHook{
 		if($datamap)
 		{
 			//not the fastest possibility, TODO: get identifier from and set hash to mysql table#	
-			$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\\TYPO3\\CMS\\ExtBase\\Object\\ObjectManager');
-			$videoRepository = $objectManager->get('\\TYPO3\\YbVideoplayer\\Domain\\Repository\\VideoRepository');
+			$objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\ExtBase\Object\ObjectManager');
+			$videoRepository = $objectManager->get('\TYPO3\YbVideoplayer\Domain\Repository\VideoRepository');
 
 			//get content object id
 			$datamap = $pObj->datamap['tx_ybvideoplayer_domain_model_video'];
@@ -26,7 +26,7 @@ class SetFullnameIdentIfierHook{
 
 			if($video->getFiles()->count() > 0)
 			{
-				$persistenceManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager');	
+				$persistenceManager = $objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager');	
 				$prefixFreeIdentifier = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($video->getFiles()->current()->getOriginalResource())['identifier'];
 				$video->setFullnameIdentifier($prefixFreeIdentifier);
 				$videoRepository->update($video);
