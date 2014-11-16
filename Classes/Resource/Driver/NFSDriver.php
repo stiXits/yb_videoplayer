@@ -14,10 +14,10 @@ class NFSDriver extends \TYPO3\CMS\Core\Resource\Driver\LocalDriver
 	/**
 	 * The NFS Share publicly reachable path (usualle http://...)
 	 * 
-	 * @var string
+	 * @var string $identifier
 	 */
-	public function getPublicUrl(\TYPO3\CMS\Core\Resource\ResourceInterface $fileOrFolder, $relativeToCurrentScript = FALSE) {
-		$publicUrl = rtrim($this->configuration['publicPath'], '/') . '/' . ltrim($fileOrFolder->getIdentifier(), '/');
+	public function getPublicUrl($identifier) {
+		$publicUrl = rtrim($this->configuration['publicPath'], '/') . '/' . ltrim($identifier(), '/');
 		return $publicUrl;
 	}
 }
