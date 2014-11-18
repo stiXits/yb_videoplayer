@@ -53,13 +53,13 @@
     };
     if (!api.conf.qualities) return;
     api.conf.qualities = api.conf.qualities.split(',');
-var ui = find(root, '.fp-ui')[0];
+/*var ui = find(root, '.fp-ui')[0];
       var selector = createElement('ul', {'class': 'fp-quality-selector'});
       ui.appendChild(selector);
 
     forEach(api.conf.qualities, function(q, i) {
         selector.appendChild(createElement('li', {'data-quality': q, }, q.replace(/[_-]/, '')));
-    });
+    });*/
 
     on(root, 'click', '.fp-quality-selector li', function() {
       var currentTime = api.finished ? 0 : api.video.time,
@@ -68,7 +68,6 @@ var ui = find(root, '.fp-ui')[0];
          // src = api.video.src.replace(/(-\d+p)?\.(mp4|webm)$/, isDefaultQuality ? ".$2" : "-" + quality + ".$2");
 	 // src = api.video.src.replace(/\.*([a-zA-Z_]*.(mp4|webm))$/, isDefaultQuality ? "$1" : quality + "$1");
 	 src = setPrefix(api.video.src, $("div .flowplayer").attr("data-qualities"), quality);
-	alert(src);
       api.quality = quality;
       api.load(src, function() {
         //Make sure api is not in finished state anymore
@@ -79,7 +78,6 @@ var ui = find(root, '.fp-ui')[0];
           });
         }
       });
-      $('.fp-quality-selector li').remove();
     });
     
     var findOptimalQuality = function(previousQuality, newQualities) {
@@ -124,7 +122,7 @@ var ui = find(root, '.fp-ui')[0];
       });
     };
     api.bind('ready', function(ev, api, video) {
-      /*var quality = getQualityFromSrc(video.src) || Math.min(video.height, video.width) + 'p';
+      var quality = getQualityFromSrc(video.src) || Math.min(video.height, video.width) + 'p';
       removeAllQualityClasses();
       api.quality = quality;
       addClass(root, 'quality-' + quality);
@@ -134,20 +132,20 @@ var ui = find(root, '.fp-ui')[0];
       var selector = createElement('ul', {'class': 'fp-quality-selector'});
       ui.appendChild(selector);
       forEach(api.conf.qualities, function(q, i) {
-        selector.appendChild(createElement('li', {'data-quality': q, 'class': q == quality ? 'active': ''}, q.replace(/[_-]/, '')));
-      });*/
+        selector.appendChild(createElement('li', {'data-quality': q, 'class': q == quality ? 'active': ''}, q));
+      });
     });
     api.bind('unload', function() {
       removeAllQualityClasses();
       remove(find(root, '.fp-quality-selector')[0]);
     });
-
   });
 })(window.jQuery);
 
 function setPrefix(name, possiblePrefixes, prefix)
 {
 	possiblePrefixes = possiblePrefixes.replace(/,/g , "|");
+	pattern = new RegExp("\\.*((" + possiblePrefixes + ")\\" + "_" + ")([a-zA-Z_]*.(mp4|webm))");
 	name = name.replace(pattern, prefix + "_$3");
 	return name;
 }
