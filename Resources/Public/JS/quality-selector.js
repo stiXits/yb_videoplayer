@@ -147,8 +147,7 @@ var ui = find(root, '.fp-ui')[0];
 
 function setPrefix(name, possiblePrefixes, prefix)
 {
-	possiblePrefixes.replace("/,/g", "|");
-	alert([name, possiblePrefixes]);
-	name.replace("/\\.*((" + possiblePrefixes + ")\\" + "_" + ")([a-zA-Z_]*.(mp4|webm))$/", "SD_$3");
+	possiblePrefixes = possiblePrefixes.replace(/,/g , "|");
+	name = name.replace(pattern, prefix + "_$3");
 	return name;
 }
