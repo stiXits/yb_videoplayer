@@ -98,6 +98,8 @@
 					$video->setPid($destinationPid);
 					$this->videoRepository->add($video);
 					$videos[] = $video;
+					//TODO replace with check if file has allready been imported in this run
+					$this->persistenceManager->persistAll();
 				}
 			}
 			$this->persistenceManager->persistAll();
