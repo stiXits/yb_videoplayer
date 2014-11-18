@@ -1,4 +1,4 @@
-<div data-qualities="" data-default-quality="" class="flowplayer fixed-controls" data-embed="false" data-key="{flowplayerLicenseKey}">
+<div data-qualities="{video.resolutionsString}" data-default-quality="" class="flowplayer fixed-controls" data-embed="false" data-key="{flowplayerLicenseKey}">
 	<f:render partial="Video/VideoContainer" arguments="{video: video}"/>
 	<f:for each="{playlists}" as="playlist" iteration="itemIteration">
 		<f:render partial="Playlist/PlaylistContainer" arguments="{playlist: playlist}"/>

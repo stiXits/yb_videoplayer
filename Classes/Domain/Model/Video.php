@@ -297,6 +297,40 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		return $prefixFreePublicUrl;
 	}
 
+	/**
+	 * returns an array of possible resolution
+	 *
+	 * @return array
+	 */
+	public function getResolutions()
+	{
+		$resolutionDescriptors = array();
+
+		$files = $this->files->toArray();
+		foreach($files as $file)
+		{
+			$title = $file->getOriginalResource()->getTitle();
+			if($title != '')
+				$resolutionDescriptors[] = $title;
+		}
+
+		return $resolutionDescriptors;
+	}
+
+	 /**
+         * returns a string of possible resolution
+         *
+         * @return string
+         */
+	public function getResolutionsString()
+	{
+		$resolutions = $this->getResolutions();
+		if(count($resolutions) == 1)
+			return $resolutions;
+		return implode(',', $this->getResolutions());
+	}
+
+
 }
 ?>
 

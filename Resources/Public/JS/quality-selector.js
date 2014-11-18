@@ -66,7 +66,9 @@ var ui = find(root, '.fp-ui')[0];
           quality = $(this).data('quality'),
           isDefaultQuality = quality === api.conf.defaultQuality,
          // src = api.video.src.replace(/(-\d+p)?\.(mp4|webm)$/, isDefaultQuality ? ".$2" : "-" + quality + ".$2");
-	src = api.video.src.replace(/\.*([a-zA-Z_]*.(mp4|webm))$/, isDefaultQuality ? "$1" : quality + "$1");
+	 // src = api.video.src.replace(/\.*([a-zA-Z_]*.(mp4|webm))$/, isDefaultQuality ? "$1" : quality + "$1");
+	 src = setPrefix(api.video.src, $("div .flowplayer").attr("data-qualities"), quality);
+	alert(src);
       api.quality = quality;
       api.load(src, function() {
         //Make sure api is not in finished state anymore
@@ -142,3 +144,11 @@ var ui = find(root, '.fp-ui')[0];
 
   });
 })(window.jQuery);
+
+function setPrefix(name, possiblePrefixes, prefix)
+{
+	possiblePrefixes.replace("/,/g", "|");
+	alert([name, possiblePrefixes]);
+	name.replace("/\\.*((" + possiblePrefixes + ")\\" + "_" + ")([a-zA-Z_]*.(mp4|webm))$/", "SD_$3");
+	return name;
+}
