@@ -84,6 +84,8 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         public function showLocalPlayerAction() {
 		//fetch playlists from settings
                 $playlistsFromSettings = explode(',', $this->settings['playlists']);
+		$_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
+		$seperator = $_extConfig['prefixSeperator'];
                 $playlists = array();
                 \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings['playlists'], 'Playlists');
                 //cummulate all assigned playlists to one
@@ -102,6 +104,8 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			//fetch video from settings
 			$video = $this->videoRepository->findByUid($this->settings['localVideo']);
 		}
+
+		$this->view->assign('resolutionSeperator', $seperator);
                 $this->view->assign('video', $video);
                 $this->view->assign('playlists', $playlists);
         }
