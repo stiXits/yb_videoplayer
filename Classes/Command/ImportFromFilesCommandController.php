@@ -69,49 +69,39 @@
 			if(!$storage->hasFolder($folder))
 			{
 				\t3lib_div::devLog('folder not found:', 'yb_videoplayer', 1, array($folder));
+				\t3lib_div::devLog('following folders exist::', 'yb_videoplayer', 1, $storage->getFoldersInFolder('.'));
 				return;
 			}
 			
-			//use getFilesInFolder when migrating to 6.2
-			$videoFiles = $storage->getFileList($folder);
-			$videos = array();
-			
 			try
-{
-			foreach($videoFiles as &$videoFile)
 			{
-				$videoFile = $storage->getFile($videoFile['identifier']);
-				
-				try
-				{
-					$video = $this->createVideoFromFile($videoFile);
-				}
-                                catch(\Exception $e)
-                                {
-                                        \t3lib_div::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
-					\t3lib_div::devLog('loaded files:', 'yb_videoplayer', 1, array($videoFiles));
-					throw new \Exception();
-                                }
 
-				if($video != null)
+	                        //use getFilesInFolder when migrating to 6.2
+        	                $videoFiles = $storage->getFilesInFolder($storage->getFolder($folder));
+                	        $videos = array();
+
+				foreach($videoFiles as &$videoFile)
 				{
-					$video->setPid($destinationPid);
-					$this->videoRepository->add($video);
-					$videos[] = $video;
-					//TODO replace with check if file has allready been imported in this run
-					$this->persistenceManager->persistAll();
+					$video = $this->allreadyImported($videoFile, $videos);
+					if($video)
+						$this->addResolutionToVideo($video, $videoFile);
+					else {
+						$video = $this->createVideoFromFile($videoFile);
+						$video->setPid($destinationPid);
+						$this->videoRepository->add($video);
+						$videos[] = $video;
+					}
 				}
+				$this->persistenceManager->persistAll();
+
+
+				$this->applyVideoFiles($videos, $videoFiles);
 			}
-			$this->persistenceManager->persistAll();
-
-
-			$this->applyVideoFiles($videos, $videoFiles);
-}
-                                 catch(\Exception $e)
-                                 {
-                                         \t3lib_div::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
-                                         throw new \Exception();
-                                 }
+                        catch(\Exception $e)
+                        {
+                        	\t3lib_div::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
+                                throw new \Exception();
+                        }
 
 		}
 
@@ -123,20 +113,43 @@
 		 */
 		protected function createVideoFromFile(\TYPO3\CMS\Core\Resource\FileInterface $file)
 		{
+			
 			//check if file is allready imported
 			$newFileIdentifier = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($file);
-			$video = $this->videoRepository->findByfullnameidentifier($newFileIdentifier['identifier'])->getFirst();
-			if($video)
-			{
-				\t3lib_div::devLog('video allready migrated:', 'yb_videoplayer', 1, array('title' => $video->getTitle(), 'uid' => $video->getUid()));
-				$this->addResolutionToVideo($video, $file);
-				return null;
-			}
-			
+
 			$video = $this->objectManager->get('\TYPO3\YbVideoplayer\Domain\Model\Video');
 			$video->setTitle($file->getName());
+			$video->setFullnameidentifier($newFileIdentifier['identifier']);
 
 			return $video;
+		}
+
+		/**
+		 * checks if the video has allready been imported
+		 * @param \TYPO3\CMS\Core\Resource\FileInterface $file
+		 * @param array $imported
+		 */
+		protected function allreadyImported(\TYPO3\CMS\Core\Resource\FileInterface &$file, &$imported)
+		{
+                        $newFileIdentifier = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($file);
+
+			//check if video has allready been imported in this run
+			foreach($imported as $video)
+			{
+				if($newFileIdentifier['identifier'] == $video->getFullnameidentifier()) {
+					return $video;
+				}
+			}
+
+                        //check if file has ever been imported
+                        $video = $this->videoRepository->findByfullnameidentifier($newFileIdentifier['identifier'])->getFirst();
+ 
+                        if($video)
+                        {
+                                 return $video;
+                        }
+
+			return null;
 		}
 
                 /** Creates Filereferences to the files and assignes them to the videorecord
@@ -189,7 +202,7 @@
 		 * @param \TYPO3\CMS\Core\Resource\FileInterface $resolution
 		 * @return \TYPO3\YbVideoplayer\Domain\Model\Video
 		 */
-		protected function addResolutionToVideo($video, $resolution)
+		protected function addResolutionToVideo(&$video, &$resolution)
 		{
 			// check if file allready exists
 			$files = $video->getFiles()->toArray();
@@ -198,8 +211,6 @@
 				if($resolution->getIdentifier() == $file->getOriginalResource()->getIdentifier())
 					return $video;
 			}
-
-			\t3lib_div::devLog('adding resolution to Video:', 'yb_videoplayer', 1, array('video' => $video->getTitle(), 'file' => $file->getOriginalResource()->getIdentifier()));
 			$this->addFileToVideo($video, $resolution);	
 		}
 	}
