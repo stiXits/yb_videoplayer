@@ -61,9 +61,9 @@ class Util
 		//prefix found
 		if($stringParts[1] != '') 
                 {
-			return array('prefix' => $stringParts[1], 'identifier' => $namelessIdentifier . $stringParts[2]);
+			return array('prefix' => $stringParts[1], 'identifier' => $namelessIdentifier . $stringParts[2], 'name' => $stringParts[2]);
 		}
-		return array('prefix' => '', 'identifier' => $file->getIdentifier());
+		return array('prefix' => '', 'identifier' => $file->getIdentifier(), 'name' => $file->getName());
 	}
 }
 
