@@ -79,7 +79,6 @@
         }
       });
     });
-    
     var findOptimalQuality = function(previousQuality, newQualities) {
       var a = parseInt(previousQuality, 0),
           ret;
