@@ -76,7 +76,6 @@
 			try
 			{
 
-	                        //use getFilesInFolder when migrating to 6.2
         	                $videoFiles = $storage->getFilesInFolder($storage->getFolder($folder));
                 	        $videos = array();
 
