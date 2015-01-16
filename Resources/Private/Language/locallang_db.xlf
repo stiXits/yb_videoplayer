@@ -30,7 +30,7 @@
                                 <source>File-identifier</source>
                         </trans-unit>
                         <trans-unit id="tx_ybvideoplayer_domain_model_video.aspectratio">
-                                <source>Aspect-Ration (in %)</source>
+                                <source>Aspect-Ration (in %), if 0 teh flowplayer default (16:9) will be used</source>
                         </trans-unit>
 
 			<trans-unit id="tx_ybvideoplayer_domain_model_video.preview">

@@ -282,7 +282,10 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
          * @return \int $aspectratio
          */
         public function getAspectRatio() {
-                return $this->aspectratio;
+		//if 0 return flowplayer feault
+		if($this->aspectratio == 0)
+			return 0.5625;
+                return $this->aspectratio/100;
         }
        
        /** 
