@@ -27,7 +27,10 @@
 				<source>Description</source>
 			</trans-unit>
                         <trans-unit id="tx_ybvideoplayer_domain_model_video.fullnameidentifier">
-                                <source>Hash of File-identifier</source>
+                                <source>File-identifier</source>
+                        </trans-unit>
+                        <trans-unit id="tx_ybvideoplayer_domain_model_video.aspectratio">
+                                <source>Aspect-Ration (in %)</source>
                         </trans-unit>
 
 			<trans-unit id="tx_ybvideoplayer_domain_model_video.preview">
