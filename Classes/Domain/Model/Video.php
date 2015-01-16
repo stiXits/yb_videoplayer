@@ -92,6 +92,13 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
          */
         protected $fullnameidentifier;
 
+        /**
+         * the videos aspect-ratio
+         *
+         * @var int
+         */
+        protected $aspectratio;
+
 	public function __construct() {
     		$this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
@@ -269,6 +276,24 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
                 $this->fullnameidentifier = $fullnameidentifier;
         }
 
+       /** 
+         * Returns the videos aspect-ratio
+         * 
+         * @return \int $aspectratio
+         */
+        public function getAspectRatio() {
+                return $this->aspectratio;
+        }
+       
+       /** 
+         * sets the videos aspect-ratio
+         * 
+         * @param \string $aspectratio
+         * @return void
+         */
+        public function setAspectratio($aspectratio) {
+                $this->aspectratio = $aspectratio;
+        }
 
 	/**
 	 * Sets the title

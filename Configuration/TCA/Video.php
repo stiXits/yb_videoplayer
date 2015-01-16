@@ -131,7 +131,7 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                                 'type' => 'input',
                                 'size' => '40',
                                 'eval' => 'trim',
-				'readOnly' => 0,
+				'readOnly' => 1,
                         )
                 ),
                'endscreen' => array (
@@ -151,6 +151,14 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                                 'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:media.addFileReference'
                                 ),
                         ), 'srt'),
+                ),
+                'aspectratio' => array (
+                        'exclude' => 1,
+                        'label'   => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_video.aspectratio',
+                        'config'  => array (
+                                'type'    => 'input',
+                                'default' => '0'
+                        )
                 ),
 	),
        'types' => array (
