@@ -5,6 +5,7 @@
 
                 /**
                 * Tries to add legacy Information to existing videos
+		* @param string $mappingFile Mapping of old filenames to new one as csv file
                 * @param string $legacyTable where to find the legacy videos
                 * @param string $legacyFileNameColumn the column that specifies the filename
                 * @param string $legacyDescriptionColumn the column that specifies the description
@@ -13,6 +14,7 @@
 		* @param string $legacyEndColumn the column that specifies the end image
                 */
 
+		private $mappingFile;
                 private $legacyTable;
                 private $legacyFileNameColumn;
                 private $legacyDescriptionColumn;
@@ -49,6 +51,8 @@
 		 */
 		protected $persistenceManager;
 
+		protected $debug = 1;
+
 		/**
 		 * initializes Objects that can't be injected
 		 */
@@ -69,7 +73,8 @@
                  * @param string $legacyPreviewColumn the column that specifies the preview image
                  * @param string $legacyEndColumn the column that specifies the end image
                  */
-                public function SearchForLegacyInformationCommand(	$legacyTable, 
+                public function SearchForLegacyInformationCommand(	$mappingFile,
+									$legacyTable, 
 									$legacyFileNameColumn, 
 									$legacyDescriptionColumn,
 									$legacyTitleColumn,
@@ -81,12 +86,14 @@
 				//add legacy information
 				$localVideos = $this->videoRepository->findAll()->toArray();
 				//\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('all videos:', 'yb_videoplayer', 1, $localVideos);
+
 				foreach ($localVideos as $key => &$video)
 				{
 					$pattern = '/(.*\/)(.*)\.(.*)/';
 					$stringParts = null;
 			                preg_match($pattern, $video->getFullnameidentifier(), $stringParts);
 					//\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('stringparts:', 'yb_videoplayer', 1, $stringParts);
+
 					$this->addInformationToVideo(	$video, 
 									$stringParts[2], 
 									$legacyTable, 
@@ -123,13 +130,14 @@
 							$legacyTitleColumn)
 		{	
 			/*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog(	'searching data for:', 
-									'yb_videoplayer', 
-									1, 
-									array(	'filename' => $fileName, 
-										'table' => $legacyTable, 
-										'filenameColumn' => $legacyFileNameColumn, 
-										'descriptionCOlumn' => $legacyDescriptionColumn, 
-										'titleColumns' => $legacyTitleColumn));*/
+										'yb_videoplayer', 
+										1, 
+										array(	'filename' => $fileName, 
+											'table' => $legacyTable, 
+											'filenameColumn' => $legacyFileNameColumn, 
+											'descriptionCOlumn' => $legacyDescriptionColumn, 
+											'titleColumns' => $legacyTitleColumn));*/
+
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(	$legacyDescriptionColumn . ', ' . $legacyTitleColumn, 
 									$legacyTable,
 									$legacyFileNameColumn . ' like \'%' . $fileName . '%\'');
@@ -149,14 +157,14 @@
 							$legacyPreviewColumn, 
 							$legacyEndColumn)
 		{
-                         /*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog( 'searching images for:',
-                                                                         'yb_videoplayer',
-                                                                         1,
-                                                                         array(  'filename' => $fileName,
-                                                                                 'table' => $legacyTable,
-                                                                                 'filenameColumn' => $legacyFileNameColumn,
-                                                                                 'previewColumn' => $legacyPreviewColumn,
-                                                                                 'endColumns' => $legacyEndColumn));*/
+                         /*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog(	'searching images for:',
+                                                                         	'yb_videoplayer',
+                                                                         	1,
+                                                                         	array(  'filename' => $fileName,
+                                                                                	'table' => $legacyTable,
+                                                                                	'filenameColumn' => $legacyFileNameColumn,
+                                                                                	'previewColumn' => $legacyPreviewColumn,
+                                                                                	'endColumns' => $legacyEndColumn));*/
 
                         $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(	$legacyPreviewColumn . ', ' . $legacyEndColumn, 
 									$legacyTable, 
@@ -171,6 +179,7 @@
                         	{
                                 	/*\t3lib_div::devLog('folder not found:', 'yb_videoplayer', 1, array($folder));
                                 	\t3lib_div::devLog('following folders exist::', 'yb_videoplayer', 1, $storage->getFoldersInFolder('.'));*/
+
                                 	return;
                         	}
 				$folder = $this->fileStorage->getFolder($folder);
@@ -251,6 +260,28 @@
 			return $fileRef;
                 }
 
+		/**
+		 * opens file, returns false if name is empty
+		 * @param string $fileName
+		 */ 
+		protected function openFile($fileName)
+		{
+			if(trim($filename) == '')
+			{
+				log('no Mapping File given!', 'yb_videoplayer', 1, array());
+				return false;
+			}
+			
+		}
+
+		protected function log($message, $extensionName, $level, $data)
+		{
+			if($this->debug)
+				\TYPO3\CMS\Core\Utility\GeneralUtility::devLog( $message,
+                                                                        	$extensionName,
+                                                                        	$level,
+                                                                        	$data);
+		}
 
 
 	}
