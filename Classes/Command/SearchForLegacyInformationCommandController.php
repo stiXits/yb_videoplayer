@@ -84,6 +84,7 @@
 		{
 			try
 			{
+				$this->simpleDebug($mappingFileName);
 				//initiate mappings-array
 				$mappingFile = $this->openFile($mappingFileName);
 				$mappingArray = false;
@@ -283,13 +284,13 @@
 		 */ 
 		protected function openFile($fileName)
 		{
-			if(trim($filename) == '')
+			if(trim($fileName) == '')
 			{
-				$this->debug('no Mapping File given!', 'yb_videoplayer');
+				$this->simpleDebug('no Mapping File given!', 'yb_videoplayer');
 			}
 			else
 			{
-				$this->debug('current working directory: ' . getcwd());
+				$this->simpleDebug('current working directory: ' . getcwd());
 				return fopen($fileName, 'r');
 			}
 			return false;
@@ -304,7 +305,7 @@
                                                                         	$data);
 		}
 
-		protected function debug($message)
+		protected function simpleDebug($message)
 		{
                         if($this->debugMode)
                                  \TYPO3\CMS\Core\Utility\GeneralUtility::devLog( $message,
