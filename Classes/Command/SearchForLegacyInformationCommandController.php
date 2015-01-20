@@ -5,7 +5,7 @@
 
                 /**
                 * Tries to add legacy Information to existing videos
-		* @param string $mappingFile Mapping of old filenames to new one as csv file
+		* @param string $mappingFileName Mapping of old filenames to new one as csv file
                 * @param string $legacyTable where to find the legacy videos
                 * @param string $legacyFileNameColumn the column that specifies the filename
                 * @param string $legacyDescriptionColumn the column that specifies the description
@@ -14,7 +14,7 @@
 		* @param string $legacyEndColumn the column that specifies the end image
                 */
 
-		private $mappingFile;
+		private $mappingFileName;
                 private $legacyTable;
                 private $legacyFileNameColumn;
                 private $legacyDescriptionColumn;
@@ -51,7 +51,7 @@
 		 */
 		protected $persistenceManager;
 
-		protected $debug = 1;
+		protected $debugMode = 1;
 
 		/**
 		 * initializes Objects that can't be injected
@@ -66,6 +66,7 @@
 
                 /**
                  * execute main job
+		 * @param string $mappingFileName Name of the file consisting mappinginformation
                  * @param string $legacyTable where to find the legacy videos
                  * @param string $legacyFileNameColumn the column that specifies the filename
                  * @param string $legacyDescriptionColumn the column that specifies the description
@@ -73,7 +74,7 @@
                  * @param string $legacyPreviewColumn the column that specifies the preview image
                  * @param string $legacyEndColumn the column that specifies the end image
                  */
-                public function SearchForLegacyInformationCommand(	$mappingFile,
+                public function SearchForLegacyInformationCommand(	$mappingFileName,
 									$legacyTable, 
 									$legacyFileNameColumn, 
 									$legacyDescriptionColumn,
@@ -83,6 +84,22 @@
 		{
 			try
 			{
+				//initiate mappings-array
+				$mappingFile = $this->openFile($mappingFileName);
+				$mappingArray = false;
+				if($mappingFile)
+				{
+					$mappingArray = array();
+
+					$keys = fgetcsv($f);
+					while (!feof($f)) {
+					    $mappingArray[] = array_combine($keys, fgetcsv($f)[0]);
+
+					}
+
+					$this->debug('generated the following mapping-array:', 'yb_videoplayer', 1, $mappingArray);
+				}
+
 				//add legacy information
 				$localVideos = $this->videoRepository->findAll()->toArray();
 				//\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('all videos:', 'yb_videoplayer', 1, $localVideos);
@@ -144,7 +161,7 @@
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 			if($row)
 			{
-				\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('found data:', 'yb_videoplayer', 1, $row);
+				//\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('found data:', 'yb_videoplayer', 1, $row);
 				$video->setTitle($row[$legacyTitleColumn]);
 				$video->setDescription($row[$legacyDescriptionColumn]);
 			}
@@ -184,13 +201,13 @@
                         	}
 				$folder = $this->fileStorage->getFolder($folder);
 
-				\t3lib_div::devLog(	'preview for:', 
+				/*\t3lib_div::devLog(	'preview for:', 
 							'yb_videoplayer', 
 							1, 
 							array('preview' => $row[$legacyPreviewColumn], 
-							'end' => $row[$legacyEndColumn]));
+							'end' => $row[$legacyEndColumn]));*/
 				
-				//find file-identifier for a file with specifi
+				//find file-identifier for a file with specific name
 				$previewImage = $this->findFileIdentifier($row[$legacyPreviewColumn]);
 				$endImage = $this->findFileIdentifier($row[$legacyEndColumn]);
 
@@ -235,10 +252,10 @@
                                                                         'sys_file',
                                                                         'name = \'' . $fileName . '\'');
                         $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-                        \TYPO3\CMS\Core\Utility\GeneralUtility::devLog( ' searchResult:', 
+                        /*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog( ' searchResult:', 
                                                                         'yb_videoplayer',
                                                                         1,
-                                                                        $row);
+                                                                        $row);*/
 			if(!$row)
 				return false;
 			return $row['identifier'];
@@ -268,20 +285,34 @@
 		{
 			if(trim($filename) == '')
 			{
-				log('no Mapping File given!', 'yb_videoplayer', 1, array());
-				return false;
+				$this->debug('no Mapping File given!', 'yb_videoplayer');
 			}
-			
+			else
+			{
+				$this->debug('current working directory: ' . getcwd());
+				return fopen($fileName, 'r');
+			}
+			return false;
 		}
 
-		protected function log($message, $extensionName, $level, $data)
+		protected function debug($message, $extensionName, $level, $data)
 		{
-			if($this->debug)
+			if($this->debugMode)
 				\TYPO3\CMS\Core\Utility\GeneralUtility::devLog( $message,
                                                                         	$extensionName,
                                                                         	$level,
                                                                         	$data);
 		}
+
+		protected function debug($message)
+		{
+                        if($this->debugMode)
+                                 \TYPO3\CMS\Core\Utility\GeneralUtility::devLog( $message,
+                                                                                'yb_videoplayer',
+                                                                                 1,
+                                                                                 array());
+		}
+
 
 
 	}
