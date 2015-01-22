@@ -112,6 +112,8 @@
 			                preg_match($pattern, $video->getFullnameidentifier(), $stringParts);
 					//\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('stringparts:', 'yb_videoplayer', 1, $stringParts);
 					$fileName = $stringParts[2];
+					if(trim($fileName) == '')
+						continue;
 
 					if(!$this->addInformationToVideo(	$video, 
 										$fileName, 
@@ -121,7 +123,7 @@
 										$legacyTitleColumn))
 					{
 						$this->addInformationToVideo(	$video,
-	                                        				$this->verifyFileName($fileName),
+	                                        				$this->verifyFileName($fileName, $mappingArray),
 	                                                                        $legacyTable,
 	                                                                        $legacyFileNameColumn,
 	                                                                        $legacyDescriptionColumn,
@@ -138,7 +140,7 @@
                                                        	         	$legacyEndColumn))
 					{
 						$this->addImagesToVideos(       $video,
-                                                				$this->verifyFileName($fileName),
+                                                				$this->verifyFileName($fileName, $mappingArray),
 	                                                                        $legacyTable,
 	                                                                        $legacyFileNameColumn,
 	                                                                        $legacyPreviewColumn,
@@ -164,14 +166,16 @@
 							$legacyDescriptionColumn, 
 							$legacyTitleColumn)
 		{	
-			/*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog(	'searching data for:', 
-										'yb_videoplayer', 
-										1, 
-										array(	'filename' => $fileName, 
-											'table' => $legacyTable, 
-											'filenameColumn' => $legacyFileNameColumn, 
-											'descriptionCOlumn' => $legacyDescriptionColumn, 
-											'titleColumns' => $legacyTitleColumn));*/
+			$this->debug(	'searching data for:', 
+					'yb_videoplayer', 
+					1, 
+					array(	'filename' => $fileName, 
+						'table' => $legacyTable, 
+						'filenameColumn' => $legacyFileNameColumn, 
+						'descriptionCOlumn' => $legacyDescriptionColumn, 
+						'titleColumns' => $legacyTitleColumn
+					)
+			);
 
 			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(	$legacyDescriptionColumn . ', ' . $legacyTitleColumn, 
 									$legacyTable,
@@ -327,9 +331,10 @@
 		 */
 		protected function verifyFileName($fileName, $mapping)
 		{
-			if(array_key_exists($filename, $mapping))
+			$this->debug('trying to map: ' . $fileName . 'with array: ', 'yb_videoplayer', 1, $mapping);
+			if(array_key_exists($fileName, $mapping))
 			{
-				$filename = $mapping[$fileName];
+				return $mapping[$fileName];
 			}
 			
 			return $fileName;

@@ -57,6 +57,7 @@
    		}
 
                 /**
+		 * TODO: ignore non video files
                  * queries formulardata from the database
                  * @param string $folder
                  * @param int $destinationPid
