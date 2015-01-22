@@ -111,22 +111,39 @@
 					$stringParts = null;
 			                preg_match($pattern, $video->getFullnameidentifier(), $stringParts);
 					//\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('stringparts:', 'yb_videoplayer', 1, $stringParts);
+					$fileName = $stringParts[2];
 
-					$this->addInformationToVideo(	$video, 
-									$stringParts[2], 
-									$legacyTable, 
-									$legacyFileNameColumn, 
-									$legacyDescriptionColumn, 
-									$legacyTitleColumn);
+					if(!$this->addInformationToVideo(	$video, 
+										$fileName, 
+										$legacyTable, 
+										$legacyFileNameColumn, 
+										$legacyDescriptionColumn, 
+										$legacyTitleColumn))
+					{
+						$this->addInformationToVideo(	$video,
+	                                        				$this->verifyFileName($fileName),
+	                                                                        $legacyTable,
+	                                                                        $legacyFileNameColumn,
+	                                                                        $legacyDescriptionColumn,
+	                                                                        $legacyTitleColumn);
+					}
 
 	                                //add legacy preview and end picture
         	                        $this->fileStorage = $this->storageRepository->findByUid(1);
-                	                $this->addImagesToVideos(       $video,
-                        	                                        $stringParts[2],
+                	                if(!$this->addImagesToVideos(	$video,
+                        	        				$fileName,
                                 	                                $legacyTable,
                                         	                        $legacyFileNameColumn,
                                                	                 	$legacyPreviewColumn,
-                                                       	         	$legacyEndColumn);
+                                                       	         	$legacyEndColumn))
+					{
+						$this->addImagesToVideos(       $video,
+                                                				$this->verifyFileName($fileName),
+	                                                                        $legacyTable,
+	                                                                        $legacyFileNameColumn,
+	                                                                        $legacyPreviewColumn,
+	                                                                        $legacyEndColumn);
+					}
 
 					$this->videoRepository->update($video);
 					$this->persistenceManager->persistAll();
@@ -165,7 +182,10 @@
 				//\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('found data:', 'yb_videoplayer', 1, $row);
 				$video->setTitle($row[$legacyTitleColumn]);
 				$video->setDescription($row[$legacyDescriptionColumn]);
+				return true;
 			}
+
+			return false;
 		}
 
 		private function addImagesToVideos(	&$video,
@@ -241,7 +261,10 @@
 										'yb_videoplayer', 
 										1, 
 										array($video->getPreview()));*/
+				return true;
                         }
+
+			return false;
 		}
 
 		/*
@@ -294,6 +317,22 @@
 				return fopen($fileName, 'r');
 			}
 			return false;
+		}
+
+		/**
+		 * if there is a mapping for the file name, it will be replaced with the mapped filename
+		 * @param string $fileName
+		 * @param array $mapping
+		 * @return string eventually mapped filename
+		 */
+		protected function verifyFileName($fileName, $mapping)
+		{
+			if(array_key_exists($filename, $mapping))
+			{
+				$filename = $mapping[$fileName];
+			}
+			
+			return $fileName;
 		}
 
 		protected function debug($message, $extensionName, $level, $data)
