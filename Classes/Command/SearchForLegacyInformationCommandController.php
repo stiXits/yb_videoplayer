@@ -95,24 +95,20 @@
 					while (!feof($mappingFile) && $i < 100) {
 						$line = fgetcsv($mappingFile);
 						if(trim($line[0]) != '' && trim($line[1] != ''))
-					   		$mappingArray[$line[0]] = $line[1];
+					   		$mappingArray[$line[0]] = trim($line[1]);
 					}
-
-					$this->debug('generated the following mapping-array:', 'yb_videoplayer', 1, $mappingArray);
 				}
 
 				//add legacy information
 				$localVideos = $this->videoRepository->findAll()->toArray();
-				//\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('all videos:', 'yb_videoplayer', 1, $localVideos);
 
 				foreach ($localVideos as $key => &$video)
 				{
 					$pattern = '/(.*\/)(.*)\.(.*)/';
 					$stringParts = null;
 			                preg_match($pattern, $video->getFullnameidentifier(), $stringParts);
-					//\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('stringparts:', 'yb_videoplayer', 1, $stringParts);
-					$fileName = $stringParts[2];
-					if(trim($fileName) == '')
+					$fileName = $stringParts[2] . '.' . $stringParts[3];
+					if(trim($fileName) == '.')
 						continue;
 
 					if(!$this->addInformationToVideo(	$video, 
@@ -172,7 +168,7 @@
 					array(	'filename' => $fileName, 
 						'table' => $legacyTable, 
 						'filenameColumn' => $legacyFileNameColumn, 
-						'descriptionCOlumn' => $legacyDescriptionColumn, 
+						'descriptionColumn' => $legacyDescriptionColumn, 
 						'titleColumns' => $legacyTitleColumn
 					)
 			);
@@ -183,7 +179,7 @@
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
 			if($row)
 			{
-				//\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('found data:', 'yb_videoplayer', 1, $row);
+				$this->debug('found data:', 'yb_videoplayer', 1, $row);
 				$video->setTitle($row[$legacyTitleColumn]);
 				$video->setDescription($row[$legacyDescriptionColumn]);
 				return true;
@@ -199,14 +195,16 @@
 							$legacyPreviewColumn, 
 							$legacyEndColumn)
 		{
-                         /*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog(	'searching images for:',
-                                                                         	'yb_videoplayer',
-                                                                         	1,
-                                                                         	array(  'filename' => $fileName,
-                                                                                	'table' => $legacyTable,
-                                                                                	'filenameColumn' => $legacyFileNameColumn,
-                                                                                	'previewColumn' => $legacyPreviewColumn,
-                                                                                	'endColumns' => $legacyEndColumn));*/
+                         $this->debug(	'searching images for:',
+                         		'yb_videoplayer',
+                                        1,
+                                        array(  'filename' => $fileName,
+                                                'table' => $legacyTable,
+                                                'filenameColumn' => $legacyFileNameColumn,
+                                                'previewColumn' => $legacyPreviewColumn,
+                                                'endColumns' => $legacyEndColumn
+					)
+			);
 
                         $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(	$legacyPreviewColumn . ', ' . $legacyEndColumn, 
 									$legacyTable, 
@@ -219,52 +217,44 @@
 				$folder = 'user_upload';
 				if(!$this->fileStorage->hasFolder($folder))
                         	{
-                                	/*\t3lib_div::devLog('folder not found:', 'yb_videoplayer', 1, array($folder));
-                                	\t3lib_div::devLog('following folders exist::', 'yb_videoplayer', 1, $storage->getFoldersInFolder('.'));*/
+                                	$this->debug('folder not found:', 'yb_videoplayer', 1, array($folder));
+                                	$this->debug('following folders exist::', 'yb_videoplayer', 1, $storage->getFoldersInFolder('.'));
 
                                 	return;
                         	}
 				$folder = $this->fileStorage->getFolder($folder);
 
-				/*\t3lib_div::devLog(	'preview for:', 
-							'yb_videoplayer', 
-							1, 
-							array('preview' => $row[$legacyPreviewColumn], 
-							'end' => $row[$legacyEndColumn]));*/
-				
 				//find file-identifier for a file with specific name
 				$previewImage = $this->findFileIdentifier($row[$legacyPreviewColumn]);
 				$endImage = $this->findFileIdentifier($row[$legacyEndColumn]);
 
-                                /*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog( ' found identifiers:',
-                                                                                'yb_videoplayer',
-                                                                                1, 
-                                                                                array(  $previewImage,
-                                                                                        $endImage));*/
+                                $this->debug(	'found identifiers:',
+                                                'yb_videoplayer',
+                                                1, 
+                                                array(  $previewImage,
+                                                        $endImage));
 
 				if($previewImage && $this->fileStorage->hasFile($previewImage)){
 					$previewImage = $this->getFileReference($video, $this->fileStorage->getFile($previewImage), 'preview');
 					$video->setPreview($previewImage);
-                                        /*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog( 'preview:',
-                                                                                        'yb_videoplayer',
-                                                                                        1,
-                                                                                        array($previewImage));*/
+                                        $this->debug(	'preview:',
+                                        		'yb_videoplayer',
+                                                        1,
+                                                        array($previewImage)
+					);
 
 				}
                                 if($endImage && $this->fileStorage->hasFile($endImage)){
 					$endImage = $this->getFileReference($video, $this->fileStorage->getFile($endImage), 'endscreen');
                                         $video->setEndscreen($endImage);
-                                	/*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog( 'endscreen:',
-                                        	                                    	'yb_videoplayer',
-                                                                                	1,
-                                                                                	array($endImage));*/
+                                	$this->debug(	'endscreen:',
+                                        	        'yb_videoplayer',
+                                                        1,
+                                                        array($endImage))
+					;
 
 				}
 
-                                /*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog(	'video:', 
-										'yb_videoplayer', 
-										1, 
-										array($video->getPreview()));*/
 				return true;
                         }
 
@@ -276,14 +266,17 @@
 		 */
 		private function findFileIdentifier($fileName)
 		{
+			$GLOBALS['TYPO3_DB']->store_lastBuiltQuery = 1;
                         $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(  'identifier',
                                                                         'sys_file',
                                                                         'name = \'' . $fileName . '\'');
                         $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-                        /*\TYPO3\CMS\Core\Utility\GeneralUtility::devLog( ' searchResult:', 
-                                                                        'yb_videoplayer',
-                                                                        1,
-                                                                        $row);*/
+			$this->simpleDebug($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
+                        $this->debug(	' searchResult:', 
+                                        'yb_videoplayer',
+                                        1,
+                                        $row);
+			$GLOBALS['TYPO3_DB']->store_lastBuiltQuery = 0;
 			if(!$row)
 				return false;
 			return $row['identifier'];
@@ -317,7 +310,6 @@
 			}
 			else
 			{
-				$this->simpleDebug('current working directory: ' . getcwd());
 				return fopen($fileName, 'r');
 			}
 			return false;
@@ -331,7 +323,6 @@
 		 */
 		protected function verifyFileName($fileName, $mapping)
 		{
-			$this->debug('trying to map: ' . $fileName . 'with array: ', 'yb_videoplayer', 1, $mapping);
 			if(array_key_exists($fileName, $mapping))
 			{
 				return $mapping[$fileName];
