@@ -5,7 +5,7 @@
 
                 /**
                 * Tries to add legacy Information to existing videos
-		* @param string $mappingFileName Mapping of old filenames to new one as csv file
+		* @param string $mappingFileName Mapping of old filenames to new one as csv file (absolute path)
                 * @param string $legacyTable where to find the legacy videos
                 * @param string $legacyFileNameColumn the column that specifies the filename
                 * @param string $legacyDescriptionColumn the column that specifies the description
@@ -66,7 +66,7 @@
 
                 /**
                  * execute main job
-		 * @param string $mappingFileName Name of the file consisting mappinginformation
+		 * @param string $mappingFileName Name of the file consisting mappinginformation (absolute path)
                  * @param string $legacyTable where to find the legacy videos
                  * @param string $legacyFileNameColumn the column that specifies the filename
                  * @param string $legacyDescriptionColumn the column that specifies the description
@@ -92,10 +92,10 @@
 				{
 					$mappingArray = array();
 
-					$keys = fgetcsv($f);
-					while (!feof($f)) {
-					    $mappingArray[] = array_combine($keys, fgetcsv($f)[0]);
-
+					while (!feof($mappingFile) && $i < 100) {
+						$line = fgetcsv($mappingFile);
+						if(trim($line[0]) != '' && trim($line[1] != ''))
+					   		$mappingArray[$line[0]] = $line[1];
 					}
 
 					$this->debug('generated the following mapping-array:', 'yb_videoplayer', 1, $mappingArray);
