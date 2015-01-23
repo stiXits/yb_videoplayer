@@ -53,7 +53,7 @@
 		 */
 		protected $persistenceManager;
 
-		protected $debugMode = 1;
+		protected $debugMode = 0;
 
 		/**
 		 * initializes Objects that can't be injected
@@ -249,22 +249,10 @@
 				if($previewImage && $this->fileStorage->hasFile($previewImage)){
 					$previewImage = $this->getFileReference($video, $this->fileStorage->getFile($previewImage), 'preview');
 					$video->setPreview($previewImage);
-                                        $this->debug(	'preview:',
-                                        		'yb_videoplayer',
-                                                        1,
-                                                        array($previewImage)
-					);
-
 				}
                                 if($endImage && $this->fileStorage->hasFile($endImage)){
 					$endImage = $this->getFileReference($video, $this->fileStorage->getFile($endImage), 'endscreen');
                                         $video->setEndscreen($endImage);
-                                	$this->debug(	'endscreen:',
-                                        	        'yb_videoplayer',
-                                                        1,
-                                                        array($endImage))
-					;
-
 				}
 
 				return true;
@@ -278,19 +266,16 @@
 		 */
 		private function findFileIdentifier($fileName)
 		{
-			$GLOBALS['TYPO3_DB']->store_lastBuiltQuery = 1;
                         $res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(  'identifier',
                                                                         'sys_file',
                                                                         'name = \'' . $fileName . '\'');
                         $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
-			$this->simpleDebug($GLOBALS['TYPO3_DB']->debug_lastBuiltQuery);
-                        $this->debug(	' searchResult:', 
-                                        'yb_videoplayer',
-                                        1,
-                                        $row);
-			$GLOBALS['TYPO3_DB']->store_lastBuiltQuery = 0;
+
 			if(!$row)
+			{
+				$this->simpleDebug('File not found: ' . $fileName);
 				return false;
+			}
 			return $row['identifier'];
 		}
 

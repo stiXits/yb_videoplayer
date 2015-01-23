@@ -49,7 +49,7 @@
 		 */
 		protected $persistenceManager;
 
-		protected $debugMode = 1;
+		protected $debugMode = 0;
 
 		/**
 		 * initializes Objects that can't be injected
