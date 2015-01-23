@@ -9,11 +9,13 @@
                 /**
                 * imports Videos from a given folder to a given pid
                 * @param string $folder where to find the videos
+		* @param int $storagePid where to find the videofolder
                 * @param int $destinationPid where to put the videos
                 * @param int $creatorUid who created the new videos
                 */
 
                 private $folder;
+		private $storagePid;
                 private $destinationPid;
                 private $creatorUid;
 
@@ -45,6 +47,8 @@
 		 */
 		protected $persistenceManager;
 
+		protected $debugMode = 1;
+
 		/**
 		 * initializes Objects that can't be injected
 		 */
@@ -59,18 +63,24 @@
                 /**
 		 * TODO: ignore non video files
                  * queries formulardata from the database
-                 * @param string $folder
-                 * @param int $destinationPid
-		 * @param int $creatorUid
+                 * @param string $folder The name of the folder containing the videofiles to be imported
+		 * @param int $storagePid Where to find the videofolder
+                 * @param int $destinationPid Where should the videos be put (site-tree)
+		 * @param int $creatorUid Who shall be the owner of the videos
                  */
-                public function ImportFromFilesCommand($folder, $destinationPid, $creatorUid)
+                public function ImportFromFilesCommand($folder, $storagePid, $destinationPid, $creatorUid)
                 {
-			$storage = $this->storageRepository->findByUid(1);
+			$storage = $this->storageRepository->findByUid($storagePid);
 			
-			if(!$storage->hasFolder($folder))
+			if(!$storage || !$storage->hasFolder($folder))
 			{
-				\t3lib_div::devLog('folder not found:', 'yb_videoplayer', 1, array($folder));
-				\t3lib_div::devLog('following folders exist::', 'yb_videoplayer', 1, $storage->getFoldersInFolder('.'));
+				if(!$storage)
+				{
+					$this->debug('storage not found:', 'yb_videoplayer', 1, array($storagePid));
+					return;
+				}
+				$this->debug('folder not found:', 'yb_videoplayer', 1, array($folder));
+				$this->debug('following folders exist::', 'yb_videoplayer', 1, $storage->getFoldersInFolder('.'));
 				return;
 			}
 			
@@ -99,7 +109,7 @@
 			}
                         catch(\Exception $e)
                         {
-                        	\t3lib_div::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
+                        	$this->debug('Exception ocurred:', 'yb_videoplayer', 1, array($e));
                                 throw new \Exception();
                         }
 
@@ -187,7 +197,7 @@
                         }
                         catch(\Exception $e)
                         {
-                                \t3lib_div::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
+                                $this->debug('Exception ocurred:', 'yb_videoplayer', 1, array($e));
                         }
 			
 			return $video;
@@ -213,5 +223,24 @@
 			}
 			$this->addFileToVideo($video, $resolution);	
 		}
+
+                protected function debug($message, $extensionName, $level, $data)
+                {
+                        if($this->debugMode)
+                                \TYPO3\CMS\Core\Utility\GeneralUtility::devLog( $message,
+                                                                                $extensionName,
+                                                                                $level,
+                                                                                $data);
+                }
+
+                protected function simpleDebug($message)
+                {
+                        if($this->debugMode)
+                                 \TYPO3\CMS\Core\Utility\GeneralUtility::devLog( $message,
+                                                                                'yb_videoplayer',
+                                                                                 1,
+                                                                                 array());
+                }
+
 	}
 ?>

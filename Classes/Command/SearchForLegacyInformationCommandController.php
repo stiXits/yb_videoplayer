@@ -12,6 +12,7 @@
 		* @param string $legacyTitleColumn the column that specifies the title
 		* @param string $legacyPreviewColumn the column that specifies the preview image
 		* @param string $legacyEndColumn the column that specifies the end image
+		* @param int $ImageFileStoragePid Where should be searched for images
                 */
 
 		private $mappingFileName;
@@ -21,6 +22,7 @@
 		private $legacyTitleColumn;
 		private $legacyPreviewColumn;
 		private $legacyEndColumn;
+		private $ImageFileStoragePid;
 
 		/**
 	         * videoRepository
@@ -73,6 +75,7 @@
                  * @param string $legacyTitleColumn the column that specifies the title
                  * @param string $legacyPreviewColumn the column that specifies the preview image
                  * @param string $legacyEndColumn the column that specifies the end image
+		 * @param int $ImageFileStoragePid Where should be searched for images
                  */
                 public function SearchForLegacyInformationCommand(	$mappingFileName,
 									$legacyTable, 
@@ -80,11 +83,13 @@
 									$legacyDescriptionColumn,
 									$legacyTitleColumn,
 									$legacyPreviewColumn, 
-									$legacyEndColumn)
+									$legacyEndColumn,
+									$ImageFileStoragePid)
 		{
 			try
 			{
-				$this->simpleDebug($mappingFileName);
+				$this->fileStorage = $this->storageRepository->findByUid($ImageFileStoragePid);
+
 				//initiate mappings-array
 				$mappingFile = $this->openFile($mappingFileName);
 				$mappingArray = false;
@@ -127,7 +132,14 @@
 					}
 
 	                                //add legacy preview and end picture
-        	                        $this->fileStorage = $this->storageRepository->findByUid(1);
+					if(!$this->fileStorage)
+					{
+						$this->debug('Filestorage not found: ', 'yb_videoplayer', 1, array());
+						$this->videoRepository->update($video);
+                                        	$this->persistenceManager->persistAll();
+						continue;
+					}
+
                 	                if(!$this->addImagesToVideos(	$video,
                         	        				$fileName,
                                 	                                $legacyTable,
@@ -150,7 +162,7 @@
 			}
                         catch(\Exception $e)
                         {
-                                \TYPO3\CMS\Core\Utility\GeneralUtility::devLog('Exception ocurred:', 'yb_videoplayer', 1, array($e));
+                                $this->debug('Exception ocurred:', 'yb_videoplayer', 1, array($e));
                                 throw $e;
                         }
 		}
