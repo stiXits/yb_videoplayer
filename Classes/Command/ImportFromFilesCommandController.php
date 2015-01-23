@@ -9,12 +9,14 @@
                 /**
                 * imports Videos from a given folder to a given pid
                 * @param string $folder where to find the videos
+		* @param string $videoExtensions Extensions to be considered (commaseperated)
 		* @param int $storagePid where to find the videofolder
                 * @param int $destinationPid where to put the videos
                 * @param int $creatorUid who created the new videos
                 */
 
                 private $folder;
+		private $videoExtensions;
 		private $storagePid;
                 private $destinationPid;
                 private $creatorUid;
@@ -64,13 +66,21 @@
 		 * TODO: ignore non video files
                  * queries formulardata from the database
                  * @param string $folder The name of the folder containing the videofiles to be imported
+		 * @param string $videoExtensions Extensions to be considered (commaseperated)
 		 * @param int $storagePid Where to find the videofolder
                  * @param int $destinationPid Where should the videos be put (site-tree)
 		 * @param int $creatorUid Who shall be the owner of the videos
                  */
-                public function ImportFromFilesCommand($folder, $storagePid, $destinationPid, $creatorUid)
+                public function ImportFromFilesCommand($folder, $videoExtensions, $storagePid, $destinationPid, $creatorUid)
                 {
 			$storage = $this->storageRepository->findByUid($storagePid);
+
+			$videoExtensionsArray = explode(',', $videoExtensions);
+			
+			//in case someone used spaces...
+			foreach($videoExtensionsArray as &$extension)
+				$extension = trim($extension);
+			
 			
 			if(!$storage || !$storage->hasFolder($folder))
 			{
@@ -92,6 +102,12 @@
 
 				foreach($videoFiles as &$videoFile)
 				{
+					if(!in_array($videoFile->getExtension(), $videoExtensionsArray))
+					{
+						$this->simpleDebug('skipping unsupported file (extension not specified): ' . $videoFile->getName());
+						continue;
+					}
+
 					$video = $this->allreadyImported($videoFile, $videos);
 					if($video)
 						$this->addResolutionToVideo($video, $videoFile);
