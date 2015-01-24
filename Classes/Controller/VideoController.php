@@ -59,6 +59,9 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	public function showGlobalPlayerAction($video) {
 		//fetch playlists from settings
                 $playlistsFromSettings = explode(',', $this->settings['playlists']);
+		$_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
+                $seperator = $_extConfig['prefixSeperator'];
+
 		$playlists = array();
 
                 //cummulate all assigned playlists to one
@@ -70,6 +73,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
 		$flowplayerLicenseKey = $_extConfig['flowplayerLicenseKey'];
 
+		$this->view->assign('resolutionSeperator', $seperator);
 		$this->view->assign('flowplayerLicenseKey', $flowplayerLicenseKey);
                 $this->view->assign('video', $video);
 		$this->view->assign('playlists', $playlists);
@@ -105,6 +109,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		}
 
 		$this->view->assign('resolutionSeperator', $seperator);
+		$this->view->assign('flowplayerLicenseKey', $flowplayerLicenseKey);
                 $this->view->assign('video', $video);
                 $this->view->assign('playlists', $playlists);
         }

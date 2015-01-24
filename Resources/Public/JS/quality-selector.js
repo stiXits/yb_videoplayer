@@ -144,8 +144,8 @@
 function setPrefix(name, possiblePrefixes, prefix)
 {
 	possiblePrefixes = possiblePrefixes.replace(/,/g , "|");
-	seperator = $("div flowplayer").attr("quality-seperator");
-	pattern = new RegExp("\\.*((" + possiblePrefixes + ")\\" + seperator + ")([a-zA-Z_]*.(mp4|webm))");
+	seperator = $("div .flowplayer").attr("quality-seperator");
+	pattern = new RegExp("\\.*((" + possiblePrefixes + ")\\" + seperator + ")([a-zA-Z0-9_]*.(mp4|webm))");
 	name = name.replace(pattern, prefix + seperator + "$3");
 	return name;
 }
