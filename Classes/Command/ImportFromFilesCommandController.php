@@ -205,7 +205,7 @@
                         try
                         {
                         	$identifier  = \TYPO3\YbVideoplayer\Utils\Util::getPrefixFreeIdentifier($file);
-                                $fileRef->setOriginalResource($video, $file, $identifier['prefix']);
+                                $fileRef->setOriginalResource($video, $file, 'file', $identifier['prefix']);
                                 $video->addFile($fileRef);
                                 $video->setFullnameidentifier($identifier['identifier']);
                                 $this->videoRepository->update($video);
