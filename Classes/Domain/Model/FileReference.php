@@ -12,7 +12,7 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference {
      * @param \TYPO3\CMS\Core\Resource\FileInterface $originalResource
      */
     public function setOriginalResource(\TYPO3\YbVideoplayer\Domain\Model\Video &$video, \TYPO3\CMS\Core\Resource\FileInterface &$originalResource, $fieldname = 'file', $resolution = "default") {
-	$objectManager = $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\\TYPO3\\CMS\\ExtBase\\Object\\ObjectManager');
+	$objectManager = $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\ExtBase\Object\ObjectManager');
 	$fileFactory = $objectManager->get('\TYPO3\CMS\Core\Resource\ResourceFactory');
 
         $dataArray = array(

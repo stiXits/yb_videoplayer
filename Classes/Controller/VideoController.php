@@ -4,7 +4,7 @@ namespace TYPO3\YbVideoplayer\Controller;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Yannick Bäer <stix@phcn.de>
+ *  (c) 2013 Yannick Bäumer <stix@phcn.de>
  *  
  *  All rights reserved
  *
@@ -57,7 +57,6 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @return void
 	 */
 	public function showGlobalPlayerAction($video) {
-		\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('0');
 		//fetch playlists from settings
                 $playlistsFromSettings = explode(',', $this->settings['playlists']);
 		$playlists = array();
