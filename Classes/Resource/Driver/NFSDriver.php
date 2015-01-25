@@ -12,12 +12,19 @@ namespace TYPO3\YbVideoplayer\Resource\Driver;
 class NFSDriver extends \TYPO3\CMS\Core\Resource\Driver\LocalDriver
 {
 	/**
+	* @return void
+	*/
+	public function initialize() {
+		$this->capabilities = \TYPO3\CMS\Core\Resource\ResourceStorage::CAPABILITY_BROWSABLE | \TYPO3\CMS\Core\Resource\ResourceStorage::CAPABILITY_PUBLIC | \TYPO3\CMS\Core\Resource\ResourceStorage::CAPABILITY_WRITABLE;
+	}
+
+	/**
 	 * The NFS Share publicly reachable path (usualle http://...)
 	 * 
 	 * @var string $identifier
 	 */
 	public function getPublicUrl($identifier) {
-		$publicUrl = rtrim($this->configuration['publicPath'], '/') . '/' . ltrim($identifier(), '/');
+		$publicUrl = rtrim($this->configuration['publicPath'], '/') . '/' . ltrim($identifier, '/');
 		return $publicUrl;
 	}
 }

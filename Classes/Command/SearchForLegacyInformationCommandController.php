@@ -53,7 +53,7 @@
 		 */
 		protected $persistenceManager;
 
-		protected $debugMode = 0;
+		protected $debugMode = 1;
 
 		/**
 		 * initializes Objects that can't be injected
@@ -226,7 +226,11 @@
                         if($row)
                         {
 				//get folder to search
-				$folder = 'user_upload';
+				$folder = 'hpi-tv';
+				if(!$this->fileStorage)
+				{
+					$this->simpleDebug('No FileStorage loaded');
+				}
 				if(!$this->fileStorage->hasFolder($folder))
                         	{
                                 	$this->debug('folder not found:', 'yb_videoplayer', 1, array($folder));
@@ -263,6 +267,7 @@
 
 		/*
 		 * @param string $fileName
+		 * TODO: add Storage id to enable mirrored filestructures on different storages
 		 */
 		private function findFileIdentifier($fileName)
 		{

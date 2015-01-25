@@ -2,7 +2,7 @@
         <f:for each="{videolist.videos}" as="video" iteration="itemIteration">
 			<div class="videoListItem">
                 <f:link.action pageUid="{settings.globalVideoPlayerPage}"  action="showGlobalPlayer" controller="Video" arguments="{video: video}">
-						<f:image src="{video.preview.originalResource.publicUrl}" width="180" alt="{video.preview.originalResource.title}" />
+						<img src="{video.preview.originalResource.publicUrl}" width="180" alt="{video.preview.originalResource.title}" />
 						<p><f:format.crop maxCharacters="160" append="&nbsp;..."><f:format.html>{video.description}</f:format.html></f:format.crop></p>
 				</f:link.action>
 			</div>
