@@ -1,7 +1,7 @@
 <video>
   <f:if condition="{video.files.0.originalResource.storage.driverType}==Stream">
     <f:then>
-      <source type="video/flash" src="mp4:HPI/HPI-TV/SD_it-gipfelblog.mp4">
+      <source type="video/flash" src="{video.files.0.originalResource.extension}:{video.files.0.originalResource.identifier}">
     </f:then>
     <f:else>
       <source type="video/mp4" src="{video.files.0.originalResource.publicUrl}"/>

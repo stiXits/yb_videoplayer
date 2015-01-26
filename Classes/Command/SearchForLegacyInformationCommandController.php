@@ -225,21 +225,6 @@
                         $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
                         if($row)
                         {
-				//get folder to search
-				$folder = 'hpi-tv';
-				if(!$this->fileStorage)
-				{
-					$this->simpleDebug('No FileStorage loaded');
-				}
-				if(!$this->fileStorage->hasFolder($folder))
-                        	{
-                                	$this->debug('folder not found:', 'yb_videoplayer', 1, array($folder));
-                                	$this->debug('following folders exist::', 'yb_videoplayer', 1, $storage->getFoldersInFolder('.'));
-
-                                	return;
-                        	}
-				$folder = $this->fileStorage->getFolder($folder);
-
 				//find file-identifier for a file with specific name
 				$previewImage = $this->findFileIdentifier($row[$legacyPreviewColumn]);
 				$endImage = $this->findFileIdentifier($row[$legacyEndColumn]);
