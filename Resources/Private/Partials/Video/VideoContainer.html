@@ -1,3 +1,10 @@
 <video>
-		<source type="video/mp4" src="{video.files.0.originalResource.publicUrl}"/>
+  <f:if condition="{video.files.0.originalResource.storage.driverType}==Stream">
+    <f:then>
+      <source type="video/flash" src="mp4:HPI/HPI-TV/SD_it-gipfelblog.mp4">
+    </f:then>
+    <f:else>
+      <source type="video/mp4" src="{video.files.0.originalResource.publicUrl}"/>
+    </f:else>
+  </f:if>	
 </video>

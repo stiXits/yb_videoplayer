@@ -1,3 +1,5 @@
+// TODO: replace mp4|webm with dynmaic extensions or wildcard
+
 (function($) {
 
   //Make it work with both FP5 and FP6

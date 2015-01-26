@@ -1,4 +1,18 @@
-<div data-qualities="{video.resolutionsString}" data-default-quality="" quality-seperator="{resolutionSeperator}" class="flowplayer fixed-controls is-splash" data-embed="false" data-key="{flowplayerLicenseKey}" data-ratio="{video.aspectratio}" style="background-image:url({video.preview.originalResource.publicUrl});">
+
+<div 	data-qualities="{video.resolutionsString}" 
+	data-default-quality="" 
+	quality-seperator="{resolutionSeperator}" 
+	class="flowplayer fixed-controls is-splash" 
+	data-embed="false" 
+	data-key="{flowplayerLicenseKey}" 
+	data-ratio="{video.aspectratio}" 
+
+ 	<f:if condition="{video.files.0.originalResource.storage.driverType}==Stream">
+		data-engine='flash' 
+		data-rtmp='{f:format.replace(substring: video.files.0.originalResource.identifier, content: video.files.0.originalResource.publicUrl, replacement: '', count: 123)}'  
+	</f:if>
+	style="background-image:url({video.preview.originalResource.publicUrl});">
+
 	<f:render partial="Video/VideoContainer" arguments="{video: video}"/>
 	<f:for each="{playlists}" as="playlist" iteration="itemIteration">
 		<f:render partial="Playlist/PlaylistContainer" arguments="{playlist: playlist}"/>
