@@ -1,3 +1,4 @@
+{namespace e=TYPO3\YbVideoplayer\ViewHelpers}
 
 <div 	data-qualities="{video.resolutionsString}" 
 	data-default-quality="" 
@@ -9,7 +10,7 @@
 
  	<f:if condition="{video.files.0.originalResource.storage.driverType}==Stream">
 		data-engine='flash' 
-		data-rtmp='{f:format.replace(substring: video.files.0.originalResource.identifier, content: video.files.0.originalResource.publicUrl, replacement: '', count: 123)}'  
+		data-rtmp='{e:replace(search: video.files.0.originalResource.identifier, subject: video.files.0.originalResource.publicUrl)}'  
 	</f:if>
 	style="background-image:url({video.preview.originalResource.publicUrl});">
 
