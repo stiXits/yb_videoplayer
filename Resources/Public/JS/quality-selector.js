@@ -55,20 +55,22 @@
     };
     if (!api.conf.qualities) return;
     api.conf.qualities = api.conf.qualities.split(',');
-/*var ui = find(root, '.fp-ui')[0];
-      var selector = createElement('ul', {'class': 'fp-quality-selector'});
-      ui.appendChild(selector);
 
-    forEach(api.conf.qualities, function(q, i) {
-        selector.appendChild(createElement('li', {'data-quality': q, }, q.replace(/[_-]/, '')));
+    /*on(root, 'hover', '.flowplayer', function(){
+        alert('mouse over');
+        $('.flowplayer').removeAttr('is-mouseout');
+        $('.flowplayer').attr('is-mouseover');
+    });
+
+     on(root, 'mouseleave', '.flowplayer', function(){
+        $('.flowplayer').removeAttr('is-mouseover');
+        $('.flowplayer').attr('is-mouseout');
     });*/
 
     on(root, 'click', '.fp-quality-selector li', function() {
       var currentTime = api.finished ? 0 : api.video.time,
           quality = $(this).data('quality'),
           isDefaultQuality = quality === api.conf.defaultQuality,
-         // src = api.video.src.replace(/(-\d+p)?\.(mp4|webm)$/, isDefaultQuality ? ".$2" : "-" + quality + ".$2");
-	 // src = api.video.src.replace(/\.*([a-zA-Z_]*.(mp4|webm))$/, isDefaultQuality ? "$1" : quality + "$1");
 	 src = setPrefix(api.video.src, $("div .flowplayer").attr("data-qualities"), quality);
       api.quality = quality;
       api.load(src, function() {
@@ -111,11 +113,6 @@
                                                                                                       d(playlistItemEl, 'defaultQuality') :
                                                                                                       api.conf.defaultQuality)),
           src = video.src.replace(/(-\d+p)?\.(mp4|webm)$/, isDefaultQuality ? ".$2" : "-" + desiredQuality + ".$2");
-      /*if (video.src !== src) {
-        ev.preventDefault();
-        api.loading = false;
-        api.load(src);
-      }*/
     });
     var removeAllQualityClasses = function() {
       forEach(api.conf.qualities, function(quality) {
@@ -140,8 +137,27 @@
       removeAllQualityClasses();
       remove(find(root, '.fp-quality-selector')[0]);
     });
+
+    api.bind("mouseenter", function () 
+    	{ 
+		if (!api.isFullscreen) 
+		{ 
+			root.addClass("is-mouseover").removeClass("is-mouseout"); 
+		} 
+    	}	
+   ); 
+   api.bind("mouseleave", function ()
+       {
+               if (!api.isFullscreen)
+               {
+                       root.addClass("is-mouseout").removeClass("is-mouseover");
+               }
+       }
+  );
   });
+
 })(window.jQuery);
+
 
 function setPrefix(name, possiblePrefixes, prefix)
 {
