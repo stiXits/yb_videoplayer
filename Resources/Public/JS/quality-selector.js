@@ -154,6 +154,12 @@
                }
        }
   );
+
+   api.bind("fullscreen", function ()
+       {
+       		root.addClass("is-mouseout").removeClass("is-mouseover");
+       }
+  )
   });
 
 })(window.jQuery);
