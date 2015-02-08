@@ -1,19 +1,18 @@
 <f:layout name="Default" />
 <f:section name="main">
 <f:flashMessages />
+<h1>{video.title}</h1>
 
-<h1>{video.title}<h2>
 <![CDATA[
-                        <style>
-                          /* custom player skin 
+			<style>
+                          /* custom player skin */
                            .flowplayer .fp-controls { background-color: rgba(0, 0, 0, 0.4)}
-                           .flowplayer .fp-timeline { background-color: rgba(0, 0, 0, 0.5)}*/
+                           .flowplayer .fp-timeline { background-color: rgba(0, 0, 0, 0.5)}
                            .flowplayer .fp-progress { background-color: rgba(219, 0, 0, 1)}
                            .flowplayer .fp-buffer { background-color: rgba(249, 249, 249, 1)}
-                           div .fp-controls {margin-bottom: 160px;}
+			   div .flowplayer {margin-bottom: 160px;}
                            </style>
 ]]>
-<div style="line-height:0px">
-	<f:render partial="Video/Player" arguments="{video: video, playlists: playlists, flowplayerLicenseKey: flowplayerLicenseKey, resolutionSeperator: resolutionSeperator}"/>
-</div>
+
+<f:render partial="Video/Player" arguments="{video: video, playlists: playlists, flowplayerLicenseKey: flowplayerLicenseKey, resolutionSeperator: resolutionSeperator}"/>
 </f:section>

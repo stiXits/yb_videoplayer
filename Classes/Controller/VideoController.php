@@ -91,6 +91,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$seperator = $_extConfig['prefixSeperator'];
                 $playlists = array();
                 \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings['playlists'], 'Playlists');
+
                 //cummulate all assigned playlists to one
                 foreach($playlistsFromSettings as &$playlist)
                 {
@@ -107,6 +108,9 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			//fetch video from settings
 			$video = $this->videoRepository->findByUid($this->settings['localVideo']);
 		}
+
+                $_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
+                $flowplayerLicenseKey = $_extConfig['flowplayerLicenseKey'];
 
 		$this->view->assign('resolutionSeperator', $seperator);
 		$this->view->assign('flowplayerLicenseKey', $flowplayerLicenseKey);
