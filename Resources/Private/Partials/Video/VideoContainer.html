@@ -1,5 +1,5 @@
 <video>
-  <f:if condition="{video.files.0.originalResource.storage.driverType}==Stream">
+  <f:if condition="{video.files.0.originalResource.storage.driverType} == 'Stream'">
     <f:then>
       <source type="video/flash" src="{video.files.0.originalResource.extension}:{video.files.0.originalResource.identifier}">
     </f:then>

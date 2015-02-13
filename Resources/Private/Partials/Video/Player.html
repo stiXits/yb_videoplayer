@@ -8,7 +8,7 @@
 	data-key="{flowplayerLicenseKey}" 
 	data-ratio="{video.aspectratio}" 
 
- 	<f:if condition="{video.files.0.originalResource.storage.driverType}==Stream">
+ 	<f:if condition="{video.files.0.originalResource.storage.driverType}=='Stream'">
 		data-engine='flash' 
 		data-rtmp='{e:replace(search: video.files.0.originalResource.identifier, subject: video.files.0.originalResource.publicUrl)}'  
 	</f:if>

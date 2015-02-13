@@ -58,6 +58,7 @@ $TYPO3_CONF_VARS['SYS']['fal']['registeredDrivers']['NFS'] = array(
 $TYPO3_CONF_VARS['SYS']['fal']['registeredDrivers']['Stream'] = array(
         'class' => 'TYPO3\YbVideoplayer\Resource\Driver\NFSDriver',
         'label' => 'Stream',
-        'flexFormDS' => 'FILE:EXT:yb_videoplayer/Configuration/FlexForm/NFSDriverFlexForm.xml'
+        'flexFormDS' => 'FILE:EXT:yb_videoplayer/Configuration/FlexForm/NFSDriverFlexForm.xml',
+	'shortName' => 'Stream'
 );
 ?>
