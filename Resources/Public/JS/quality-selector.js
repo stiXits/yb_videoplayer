@@ -56,17 +56,6 @@
     if (!api.conf.qualities) return;
     api.conf.qualities = api.conf.qualities.split(',');
 
-    /*on(root, 'hover', '.flowplayer', function(){
-        alert('mouse over');
-        $('.flowplayer').removeAttr('is-mouseout');
-        $('.flowplayer').attr('is-mouseover');
-    });
-
-     on(root, 'mouseleave', '.flowplayer', function(){
-        $('.flowplayer').removeAttr('is-mouseover');
-        $('.flowplayer').attr('is-mouseout');
-    });*/
-
     on(root, 'click', '.fp-quality-selector li', function() {
       var currentTime = api.finished ? 0 : api.video.time,
           quality = $(this).data('quality'),
@@ -140,18 +129,12 @@
 
     api.bind("mouseenter", function () 
     	{ 
-		if (!api.isFullscreen) 
-		{ 
-			root.addClass("is-mouseover").removeClass("is-mouseout"); 
-		} 
+		root.addClass("is-mouseover").removeClass("is-mouseout"); 
     	}	
    ); 
    api.bind("mouseleave", function ()
        {
-               if (!api.isFullscreen)
-               {
-                       root.addClass("is-mouseout").removeClass("is-mouseover");
-               }
+                root.addClass("is-mouseout").removeClass("is-mouseover");
        }
   );
 
