@@ -53,7 +53,7 @@
 		 */
 		protected $persistenceManager;
 
-		protected $debugMode = 1;
+		protected $debugMode = 0;
 
 		/**
 		 * initializes Objects that can't be injected
@@ -63,7 +63,8 @@
                         $this->storageRepository = $this->objectManager->get('TYPO3\CMS\Core\Resource\StorageRepository');
 			$this->persistenceManager = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager');
 			$this->configurationManager = $this->objectManager->get('TYPO3\CMS\Extbase\Configuration\ConfigurationManager');
-
+                        $_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
+                        $this->debugMode = $_extConfig['debugMode'];
    		}
 
                 /**
