@@ -36,17 +36,9 @@ $pluginSignature = strtolower($extensionName) . '_localvideoplayer';
 $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
 t3lib_extMgm::addPiFlexFormValue($pluginSignature, 'FILE:EXT:'.$_EXTKEY.'/Configuration/FlexForm/Video/LocalVideoPlayer.xml');
 
-
 if (TYPO3_MODE === 'BE') {
 
 }
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
-    $_EXTKEY,
-    'tx_ybvideoplayer_domain_model_video',
-    'categories',
-    $options = array()
-);
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_ybvideoplayer_domain_model_playlist', 'EXT:yb_videoplayer/Resources/Private/Language/locallang_csh_tx_ybvideoplayer_domain_model_playlist.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_ybvideoplayer_domain_model_playlist');
@@ -105,4 +97,12 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array(
 );
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Videoplayer');
+
+/*\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
+    $_EXTKEY,
+    'tx_ybvideoplayer_domain_model_video',
+    'categories',
+    $options = array()
+);*/
+
 ?>

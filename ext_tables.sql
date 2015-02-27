@@ -56,7 +56,7 @@ CREATE TABLE tx_ybvideoplayer_domain_model_video (
 	title varchar(255) DEFAULT '' NOT NULL,
 	subtitle varchar(255) DEFAULT '' NOT NULL,
 	aspectratio int(11) unsigned DEFAULT '0' NOT NULL,
-	categories int(11) DEFAULT '' NOT NULL,
+#	categories int(11) DEFAULT '' NOT NULL,
 
         tstamp int(11) unsigned DEFAULT '0' NOT NULL,
         crdate int(11) unsigned DEFAULT '0' NOT NULL,
