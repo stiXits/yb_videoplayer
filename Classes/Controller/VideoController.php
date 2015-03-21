@@ -90,7 +90,6 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
 		$seperator = $_extConfig['prefixSeperator'];
                 $playlists = array();
-                \TYPO3\CMS\Core\Utility\DebugUtility::debug($this->settings['playlists'], 'Playlists');
 
                 //cummulate all assigned playlists to one
                 foreach($playlistsFromSettings as &$playlist)
