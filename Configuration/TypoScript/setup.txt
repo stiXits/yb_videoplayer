@@ -3,6 +3,7 @@ page.includeCSS.flowplayerplaylist = {$plugin.tx_ybvideoplayer.configuration.flo
 page.includeCSS.flowplayerresolutionscss = {$plugin.tx_ybvideoplayer.configuration.flowplayerResolutionsCss}
 page.includeJS.flowplayermin = {$plugin.tx_ybvideoplayer.configuration.flowplayerJs}
 page.includeJS.flowplayerresolutionsjs = {$plugin.tx_ybvideoplayer.configuration.flowplayerResolutionsJs}
+page.includeJS.videoplayerjs = {$plugin.tx_ybvideoplayer.configuration.videoplayerJs}
 
 plugin.tx_ybvideoplayer {
 	view {

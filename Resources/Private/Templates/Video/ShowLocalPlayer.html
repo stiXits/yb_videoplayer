@@ -14,5 +14,7 @@
                            </style>
 ]]>
 
-<f:render partial="Video/Player" arguments="{video: video, playlists: playlists, flowplayerLicenseKey: flowplayerLicenseKey, resolutionSeperator: resolutionSeperator}"/>
+<div class="yb_videoplayer" style="visibility: hidden">
+	<f:render partial="Video/Player" arguments="{video: video, playlists: playlists, flowplayerLicenseKey: flowplayerLicenseKey, resolutionSeperator: resolutionSeperator}"/>
+</div>
 </f:section>

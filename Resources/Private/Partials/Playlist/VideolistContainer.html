@@ -1,6 +1,6 @@
-<div class="yb_videolist inner">
+<div class="yb_videolist inner" >
         <f:for each="{videolist.videos}" as="video" iteration="itemIteration">
-		<div class="videoListItem">
+		<div class="videoListItem" style="visibility: hidden">
                 	<f:link.action pageUid="{settings.globalVideoPlayerPage}"  action="showGlobalPlayer" controller="Video" arguments="{video: video}">
 				<img src="{video.preview.originalResource.publicUrl}" width="180" alt="{video.preview.originalResource.title}" />
 				<h3>{video.title}</h3>
