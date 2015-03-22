@@ -1,4 +1,7 @@
 <div class="yb_videolist inner" >
+	<div class="loadingBar">	
+		<img src="{f:uri.resource(path: 'Icons/Loading_bar.gif')}">
+	</div>
         <f:for each="{videolist.videos}" as="video" iteration="itemIteration">
 		<div class="videoListItem" style="visibility: hidden">
                 	<f:link.action pageUid="{settings.globalVideoPlayerPage}"  action="showGlobalPlayer" controller="Video" arguments="{video: video}">
