@@ -19,6 +19,7 @@ plugin.tx_ybvideoplayer {
 		flowplayerResolutionsJs = EXT:yb_videoplayer/Resources/Public/JS/quality-selector.js
 		flowplayerResolutionsCss = EXT:yb_videoplayer/Resources/Public/CSS/quality-selector.css
 		#flowplayerJs =  EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/flowplayer.js
+		imagesLoadedJs = EXT:yb_videoplayer/Resources/Public/JS/jquery.waitforimages.min.js
 	}
 }
 
