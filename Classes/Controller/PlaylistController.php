@@ -46,9 +46,10 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 * action list
 	 *
 	 * @param integer $page
+         * @dontvalidate $page
 	 * @return void
 	 */
-	public function videolistAction($page) {
+	public function videolistAction($page = NULL) {
 		$pageSize =  $this->settings['pageSize'];
 		$playlistsFromSettings = explode(',', $this->settings['playlists']);
 		$playlists = array();
