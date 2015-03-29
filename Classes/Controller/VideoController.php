@@ -54,6 +54,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * displays a given video 
 	 *
 	 * @param  \TYPO3\YbVideoplayer\Domain\Model\Video $video
+	 * @dontvalidate $video
 	 * @return void
 	 */
 	public function showGlobalPlayerAction($video) {
@@ -81,10 +82,11 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 
         /**
          * shows a video set in the plugins settings
-         *
+         * @param  \TYPO3\YbVideoplayer\Domain\Model\Video $video
+	 * @dontvalidate $video
          * @return void
          */
-        public function showLocalPlayerAction() {
+        public function showLocalPlayerAction(\TYPO3\YbVideoplayer\Domain\Model\Video $video = NULL) {
 		//fetch playlists from settings
                 $playlistsFromSettings = explode(',', $this->settings['playlists']);
 		$_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
@@ -96,16 +98,17 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 {
                         array_push($playlists, $this->playlistRepository->findByUid($playlist));
                 }
-
-		$video = 0;
-		if($this->settings['useFirstFromPlaylist'] === '1')
+		if($video == NULL)
 		{
-			$video = $playlists[0]->getVideos()->current();
-		}
-		else
-		{
-			//fetch video from settings
-			$video = $this->videoRepository->findByUid($this->settings['localVideo']);
+			if($this->settings['useFirstFromPlaylist'] === '1')
+			{
+				$video = $playlists[0]->getVideos()->current();
+			}
+			else
+			{
+				//fetch video from settings
+				$video = $this->videoRepository->findByUid($this->settings['localVideo']);
+			}
 		}
 
                 $_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);

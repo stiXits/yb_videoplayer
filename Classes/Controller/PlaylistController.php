@@ -45,9 +45,11 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	/**
 	 * action list
 	 *
+	 * @param integer $page
 	 * @return void
 	 */
-	public function videolistAction() {
+	public function videolistAction($page) {
+		$pageSize =  $this->settings['pageSize'];
 		$playlistsFromSettings = explode(',', $this->settings['playlists']);
 		$playlists = array();
 		//cummulate all assigned playlists to one
@@ -56,8 +58,10 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 			array_push($playlists, $this->playlistRepository->findByUid($playlist));
 		}
 
-		
 		$this->view->assign('videolists', $playlists);
+		$this->view->assign('nextpage', $page + 1);
+		$this->view->assign('min', $page * $pageSize);
+		$this->view->assign('max', ($page + 1) * $pageSize);
 	}
 
 	/**

@@ -20,6 +20,17 @@
         	       </TCEforms>
         	</settings.playlists>
 
+                <settings.pageSize>
+                        <TCEforms>
+                                <label>Pagesize</label>
+                                <config>
+                                        <type>input</type>
+                                        <size>4</size>
+					<placeholder>20</placeholder>
+                               </config>
+                       </TCEforms>
+                </settings.pageSize>
+
 		<settings.globalVideoPlayerPage>
                 	<TCEforms>
 	                	<label>Global Player Page (if not set, the extensions standard will be used)</label>

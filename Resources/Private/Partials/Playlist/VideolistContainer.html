@@ -2,14 +2,25 @@
 	<div class="loadingBar">	
 		<img src="{f:uri.resource(path: 'Icons/Loading_bar.gif')}">
 	</div>
-        <f:for each="{videolist.videos}" as="video" iteration="itemIteration">
+        <f:for each="{videolist.videos}" as="video" key="number">
+		<f:if condition="{key}>={min}">
+		<f:if condition="{key<={max}">
 		<div class="videoListItem" style="visibility: hidden">
-                	<f:link.action pageUid="{settings.globalVideoPlayerPage}"  action="showGlobalPlayer" controller="Video" arguments="{video: video}">
+                	<f:link.action pageUid="{settings.globalVideoPlayerPage}"  action="showLocalPlayer" controller="Video" arguments="{video: video}" >
 				<img class="deferred" src="/fileadmin/templates/img/hpi_logo_srgb_wb_sl1_web80.png" data-src="{video.preview.originalResource.publicUrl}" width="180" alt="{video.preview.originalResource.title}" />
 				<h3>{video.title}</h3>
 				<p><f:format.crop maxCharacters="160" append="&nbsp;..."><f:format.html>{video.description}</f:format.html></f:format.crop></p>
 			</f:link.action>
 		</div>
-       </f:for>
+		</f:if>
+		</f:if>
+         </f:for>
+         <div class="videoListItem" style="visibility: hidden">
+               <f:link.action pageUid="{settings.globalVideoPlayerPage}"  action="showLocalPlayer" controller="Video" additionalParams="{tx_ybvideoplayer_videolistcontainer : {page: nextpage}}">
+                       <img class="deferred" src="/fileadmin/templates/img/hpi_logo_srgb_wb_sl1_web80.png" width="180" alt="{video.preview.originalResource.title}" />
+                       <h3>Mehr</h3>
+               </f:link.action>
+        </div>
+
 	<div class="clear"></div>
 </div>
