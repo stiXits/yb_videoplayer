@@ -2,9 +2,9 @@
 	<div class="loadingBar">	
 		<img src="{f:uri.resource(path: 'Icons/Loading_bar.gif')}">
 	</div>
-        <f:for each="{videolist.videos}" as="video" key="number">
-		<f:if condition="{key}>={min}">
-		<f:if condition="{key<={max}">
+        <f:for each="{videolist.videos}" as="video" iteration="it">
+		<f:if condition="{it.index}>={min}">
+		<f:if condition="{it.index}<={max}">
 		<div class="videoListItem" style="visibility: hidden">
                 	<f:link.action pageUid="{settings.globalVideoPlayerPage}"  action="showLocalPlayer" controller="Video" arguments="{video: video}" >
 				<img class="deferred" src="/fileadmin/templates/img/hpi_logo_srgb_wb_sl1_web80.png" data-src="{video.preview.originalResource.publicUrl}" width="180" alt="{video.preview.originalResource.title}" />
