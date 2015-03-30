@@ -65,6 +65,8 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		foreach($playlistsFromSettings as &$playlist)
 		{
 			$playlist = $this->playlistRepository->findByUid($playlist);
+			$playlist->setVideoPid(110669);
+			\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->videoRepository);
 			\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($playlist);
 			if($playlist->getVideopid() != NULL)
 			{
