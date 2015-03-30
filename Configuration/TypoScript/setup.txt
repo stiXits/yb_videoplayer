@@ -60,6 +60,14 @@ module.tx_ybvideoplayer {
 	                                }
 	                       }
 	                }
+
+                        TYPO3\YbVideoplayer\Domain\Model\Video {
+                                mapping {
+                                        columns { 
+                                                crdate.mapOnProperty = crdate
+                                        }       
+                               }        
+                        }
 	       }
 	}
 

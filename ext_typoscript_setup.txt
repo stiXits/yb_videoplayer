@@ -12,6 +12,14 @@ config.tx_extbase {
 					}
 				}
 			}
+
+                        TYPO3\YbVideoplayer\Domain\Model\Video {
+                                mapping {
+                                        columns {
+                                                crdate.mapOnProperty = crdate
+                                        }
+                               }
+                        }
 		}
 	}
 }

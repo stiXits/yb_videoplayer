@@ -99,6 +99,10 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
          */
         protected $aspectratio;
 
+	/** @var integer 
+	 */
+	protected $crdate;
+
 	public function __construct() {
     		$this->files = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
@@ -358,7 +362,23 @@ class Video extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		return implode(',', $this->getResolutions());
 	}
 
+	/**
+	* Returns the crdate
+	*
+	* @return string
+	*/
+	public function getCrdate() {
+		return $this->crdate;
+	}
 
+        /**     
+        * changes the crdate
+        * 
+        * @param integer
+        */
+        public function setCrdate($crdate) {
+                $this->crdate = $crdate;
+        }
 }
 ?>
 

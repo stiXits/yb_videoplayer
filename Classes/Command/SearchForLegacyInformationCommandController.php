@@ -186,7 +186,7 @@
 					)
 			);
 
-			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(	$legacyDescriptionColumn . ', ' . $legacyTitleColumn, 
+			$res = $GLOBALS['TYPO3_DB']->exec_SELECTquery(	$legacyDescriptionColumn . ', ' . $legacyTitleColumn . ', ' . 'crdate', 
 									$legacyTable,
 									$legacyFileNameColumn . ' like \'%' . $fileName . '%\'');
 			$row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($res);
@@ -195,6 +195,8 @@
 				$this->debug('found data:', 'yb_videoplayer', 1, $row);
 				$video->setTitle($row[$legacyTitleColumn]);
 				$video->setDescription($row[$legacyDescriptionColumn]);
+				$video->setCrdate($row['crdate']);
+				$this->debug('set crdate of: ' . $video->getUid(), 'yb_videoplayer', 1, array($row['crdate']));
 				return true;
 			}
 
