@@ -65,12 +65,10 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		foreach($playlistsFromSettings as &$playlist)
 		{
 			$playlist = $this->playlistRepository->findByUid($playlist);
-			$playlist->setVideoPid(110669);
-			\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($this->videoRepository);
-			\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($playlist);
 			if($playlist->getVideopid() != NULL)
 			{
-				$playlist->setVideos($this->videoRepository->findByPid($playlist->getVideopid()));
+				$videos = $this->fillOjectStorageFromQueryResult($this->videoRepository->findByPid($playlist->getVideopid()));
+				$playlist->setVideos($videos);
 			}
 			array_push($playlists, $playlist);
 		}
@@ -80,6 +78,22 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$this->view->assign('min', $page * $pageSize);
 		$this->view->assign('max', ($page + 1) * $pageSize);
 	}
+
+	/**
+	* Fill objectStorage from QueryResult
+	*
+	* @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $queryResult
+	* @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+	*/
+	protected function fillOjectStorageFromQueryResult(\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $queryResult=NULL) {
+		$objectStorage = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+		if (NULL!==$queryResult) {
+			foreach($queryResult AS $object) {
+				$objectStorage->attach($object);
+			}
+		}
+		return $objectStorage;
+	} 
 
 	/**
 	 * action show

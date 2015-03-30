@@ -65,7 +65,7 @@ class VideoRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
                 $query->matching($query->equals('pid', $pid));
                 $query->setOrderings(
                         array(
-                                'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+                                'crdate' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING
                         )
                 );
                 return $query->execute();
