@@ -59,5 +59,17 @@ class VideoRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 	}
 
+        public function findByPid($pid)
+        {
+                $query = $this->createQuery();
+                $query->matching($query->equals('pid', $pid));
+                $query->setOrderings(
+                        array(
+                                'crdate' => Tx_Extbase_Persistence_QueryInterface::ORDER_ASCENDING
+                        )
+                );
+                return $query->execute();
+        }
+
 }
 ?>

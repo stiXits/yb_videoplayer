@@ -38,5 +38,6 @@ class PlaylistRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
                 $querySettings->setRespectStoragePage(FALSE);
                 $this->setDefaultQuerySettings($querySettings);
         }
+
 }
 ?>

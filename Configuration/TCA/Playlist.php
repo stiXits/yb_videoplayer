@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_ybvideoplayer_domain_model_playlist'] = array(
 	'ctrl' => $TCA['tx_ybvideoplayer_domain_model_playlist']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, description, title, videos',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, description, title, videos, videopid'
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, description, title, videos,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, description, title, videopid, videos,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -123,6 +123,19 @@ $TCA['tx_ybvideoplayer_domain_model_playlist'] = array(
 				'eval' => 'trim'
 			),
 		),
+                'videopid' => array(
+			'exclude' => 0,
+                        'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_playlist.videoPid',
+                        'config' => array(
+                                'type' => 'group',
+                                'internal_type' => 'db',
+                                'allowed' => 'pages',
+                                'size' => 1,
+                                'minitems' => 0,
+                                'maxitems' => 1,
+                        )
+                ),
+
 		'videos' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:yb_videoplayer/Resources/Private/Language/locallang_db.xlf:tx_ybvideoplayer_domain_model_playlist.videos',

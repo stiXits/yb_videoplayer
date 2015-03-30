@@ -42,6 +42,14 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	 */
 	protected $playlistRepository;
 
+        /**
+         * videoRepository
+         *
+         * @var \TYPO3\YbVideoplayer\Domain\Repository\VideoRepository
+         * @inject
+         */
+        protected $videoRepository;
+
 	/**
 	 * action list
 	 *
@@ -56,7 +64,13 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		//cummulate all assigned playlists to one
 		foreach($playlistsFromSettings as &$playlist)
 		{
-			array_push($playlists, $this->playlistRepository->findByUid($playlist));
+			$playlist = $this->playlistRepository->findByUid($playlist);
+			\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($playlist);
+			if($playlist->getVideopid() != NULL)
+			{
+				$playlist->setVideos($this->videoRepository->findByPid($playlist->getVideopid()));
+			}
+			array_push($playlists, $playlist);
 		}
 
 		$this->view->assign('videolists', $playlists);

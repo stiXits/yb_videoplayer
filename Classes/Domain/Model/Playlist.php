@@ -57,6 +57,13 @@ class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $videos;
 
 	/**
+	 * use videos from page
+	 * @var int
+	 */
+	protected $videopid;
+
+
+	/**
 	 * __construct
 	 *
 	 * @return Playlist
@@ -117,6 +124,26 @@ class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setTitle($title) {
 		$this->title = $title;
 	}
+
+        /**
+         * Returns the videoPid
+         *
+         * @return int
+         */
+        public function getVideopid() {
+                return $this->videopid;
+        }
+ 
+        /**
+         * Sets the videopid
+         *
+         * @param int $videopid
+         * @return void
+         */
+        public function setVideopid($videopid) {
+                $this->videopid = $videopid;
+        }
+
 
 	/**
 	 * Adds a

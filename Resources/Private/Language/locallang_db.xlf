@@ -16,6 +16,10 @@
 			<trans-unit id="tx_ybvideoplayer_domain_model_playlist.videos">
 				<source>Videos</source>
 			</trans-unit>
+                        <trans-unit id="tx_ybvideoplayer_domain_model_playlist.videoPid">
+                                <source>Verwende Videos von Folgender Seite:</source>
+                        </trans-unit>
+
 
 			<trans-unit id="tx_ybvideoplayer_domain_model_video">
 				<source>Video</source>

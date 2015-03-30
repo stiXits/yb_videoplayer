@@ -78,6 +78,7 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array(
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
 		'dividers2tabs' => TRUE,
+		'sortby' => 'crdate',
 		'versioningWS' => 2,
 		'versioning_followPages' => TRUE,
 		'origUid' => 't3_origuid',

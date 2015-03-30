@@ -9,6 +9,7 @@ CREATE TABLE tx_ybvideoplayer_domain_model_playlist (
 	description text NOT NULL,
 	title varchar(255) DEFAULT '' NOT NULL,
 	videos int(11) unsigned DEFAULT '0' NOT NULL,
+	videopid int(11) DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
