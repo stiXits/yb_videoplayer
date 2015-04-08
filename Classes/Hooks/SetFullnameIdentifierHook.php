@@ -23,6 +23,8 @@ class SetFullnameIdentIfierHook{
 			}
 		
 			$video = $videoRepository->findByUid($id);
+			if($video == null)			
+				return;
 
 			if($video->getFiles()->count() > 0)
 			{

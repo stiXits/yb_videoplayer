@@ -98,6 +98,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 {
                         array_push($playlists, $this->playlistRepository->findByUid($playlist));
                 }
+
 		if($video == NULL)
 		{
 			if($this->settings['useFirstFromPlaylist'] === '1')

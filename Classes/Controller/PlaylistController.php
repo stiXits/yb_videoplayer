@@ -65,11 +65,6 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		foreach($playlistsFromSettings as &$playlist)
 		{
 			$playlist = $this->playlistRepository->findByUid($playlist);
-			if($playlist->getVideopid() != NULL)
-			{
-				$videos = $this->fillOjectStorageFromQueryResult($this->videoRepository->findByPid($playlist->getVideopid()));
-				$playlist->setVideos($videos);
-			}
 			array_push($playlists, $playlist);
 		}
 

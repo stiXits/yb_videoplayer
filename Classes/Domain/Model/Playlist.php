@@ -34,6 +34,18 @@ namespace TYPO3\YbVideoplayer\Domain\Model;
  */
 class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
+        /**
+         * videoRepository
+         *
+         * @var \TYPO3\YbVideoplayer\Domain\Repository\VideoRepository
+         */
+        protected $videoRepository;
+
+	/**
+	* @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
+	*/
+	protected $objectManager;
+
 	/**
 	 * textual description of the playlist
 	 *
@@ -62,6 +74,12 @@ class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $videopid;
 
+	/**
+	 * used for lazy initialization of videos if videopid is set
+	 * @var int
+	 */
+	protected $initializedVideoid;
+
 
 	/**
 	 * __construct
@@ -71,6 +89,17 @@ class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function __construct() {
 		//Do not remove the next line: It would break the functionality
 		$this->initStorageObjects();
+	}
+
+	/**
+	 * lazy initialization of seldomly used properties
+	 */
+	protected function lazyInit()
+	{
+		if($this->objectManager == NULL)
+			$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('\TYPO3\CMS\Extbase\Object\ObjectManager');
+		if($this->videoRepository == NULL)
+			$this->videoRepository = $this->objectManager->get('\TYPO3\YbVideoplayer\Domain\Repository\VideoRepository');
 	}
 
 	/**
@@ -141,6 +170,7 @@ class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
          * @return void
          */
         public function setVideopid($videopid) {
+
                 $this->videopid = $videopid;
         }
 
@@ -171,6 +201,13 @@ class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\TYPO3\YbVideoplayer\Domain\Model\Video> videos
 	 */
 	public function getVideos() {
+		if($this->videopid != $this->initializedVideoid)
+		{
+			$this->lazyInit();
+                	$videos = $this->fillOjectStorageFromQueryResult($this->videoRepository->findByPid($this->getVideopid()));
+                        $this->setVideos($videos);
+		}
+
 		return $this->videos;
 	}
 
@@ -183,6 +220,23 @@ class Playlist extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setVideos(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $videos) {
 		$this->videos = $videos;
 	}
+
+        /**
+        * Fill objectStorage from QueryResult
+        *
+        * @param \TYPO3\CMS\Extbase\Persistence\QueryResultInterface $queryResult
+        * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+        */
+        protected function fillOjectStorageFromQueryResult(\TYPO3\CMS\Extbase\Persistence\QueryResultInterface $queryResult=NULL) {
+                $objectStorage = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\ObjectStorage');
+                if (NULL!==$queryResult) {
+                        foreach($queryResult AS $object) {
+                                $objectStorage->attach($object);
+                        }
+                }
+                return $objectStorage;
+        }
+
 
 }
 ?>
