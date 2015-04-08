@@ -7,5 +7,8 @@ prefixSeperator = _
 # cat=basic; type=string; label=Resolution Level prefixes (comma seperated, syntax sensitive)
 prefixes = HD,SD,LD
 
+# cat=basic; type=string; label=Default Preview Image
+defaultpreview = 
+
 # cat=basic; type=boolean; label=Enable Debug Mode
 debugMode = 0

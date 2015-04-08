@@ -60,7 +60,12 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 	public function videolistAction($page = NULL) {
 		$pageSize =  $this->settings['pageSize'];
 		$playlistsFromSettings = explode(',', $this->settings['playlists']);
+
+		$_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
+                $defaultPreview = $_extConfig['defaultpreview'];
+
 		$playlists = array();
+
 		//cummulate all assigned playlists to one
 		foreach($playlistsFromSettings as &$playlist)
 		{
@@ -72,6 +77,7 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$this->view->assign('nextpage', $page + 1);
 		$this->view->assign('min', $page * $pageSize);
 		$this->view->assign('max', ($page + 1) * $pageSize);
+		$this->view->assign('defaultpreview', $defaultPreview);
 	}
 
 	/**
