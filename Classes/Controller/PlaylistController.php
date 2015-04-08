@@ -75,6 +75,7 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 
 		$this->view->assign('videolists', $playlists);
 		$this->view->assign('nextpage', $page + 1);
+		$this->view->assign('currentpage', $page);
 		$this->view->assign('min', $page * $pageSize);
 		$this->view->assign('max', ($page + 1) * $pageSize);
 		$this->view->assign('defaultpreview', $defaultPreview);

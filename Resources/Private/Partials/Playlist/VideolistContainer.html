@@ -6,7 +6,7 @@
 		<f:if condition="{it.index}>={min}">
 		<f:if condition="{it.index}<={max}">
 		<div class="videoListItem" style="visibility: hidden">
-                	<f:link.action pageUid="{settings.globalVideoPlayerPage}"  action="showLocalPlayer" controller="Video" arguments="{video: video}" >
+                	<f:link.action pageUid="{settings.globalVideoPlayerPage}"  action="showLocalPlayer" controller="Video" arguments="{video: video}" additionalParams="{tx_ybvideoplayer_videolistcontainer : {page: currentpage}}" >
 				<img class="deferred" src="{defaultpreview}" data-src="{video.preview.originalResource.publicUrl}" width="180" alt="{video.preview.originalResource.title}" />
 				<h3>{video.title}</h3>
 				<p><f:format.crop maxCharacters="160" append="&nbsp;..."><f:format.html>{video.description}</f:format.html></f:format.crop></p>
