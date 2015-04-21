@@ -171,7 +171,8 @@
 			}
 
                         //check if file has ever been imported
-                        $video = $this->videoRepository->findByfullnameidentifier($newFileIdentifier['identifier'])->getFirst();
+			//check also hidden videos
+                        $video = $this->videoRepository->findAllByFullnameIdentifier($newFileIdentifier['identifier'])->getFirst();
  
                         if($video)
                         {

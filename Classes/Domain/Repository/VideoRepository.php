@@ -71,5 +71,14 @@ class VideoRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
                 return $query->execute();
         }
 
+	// also finds hidden videos
+	public function findAllByFullnameIdentifier($fullnameIdentifier)
+	{
+	        $query = $this->createQuery();
+		$query->getQuerySettings()->setIgnoreEnableFields(TRUE);
+	        $query->matching($query->equals('fullnameidentifier', $fullnameIdentifier));
+	        return $query->execute();
+	}
+
 }
 ?>
