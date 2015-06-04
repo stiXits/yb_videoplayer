@@ -64,6 +64,9 @@ class PlaylistController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControl
 		$_extConfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['yb_videoplayer']);
                 $defaultPreview = $_extConfig['defaultpreview'];
 
+                if(intval($pageSize) < 1)
+                        $pageSize = $_extConfig['defaultPlaylistSize'];
+
 		$playlists = array();
 
 		//cummulate all assigned playlists to one

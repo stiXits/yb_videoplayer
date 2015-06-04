@@ -1,3 +1,6 @@
+# cat=basic; type=integer; label=Default Playlist size
+defaultPlaylistSize = 20
+
 # cat=basic; type=string; label=Flowplayer Lizenskey
 flowplayerLicenseKey = xxxxxxxxxxxxxxxxxxx
 
