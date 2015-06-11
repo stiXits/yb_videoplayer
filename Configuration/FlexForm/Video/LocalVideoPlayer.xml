@@ -5,6 +5,15 @@
         </TCEforms>
         <type>array</type>
         <el>
+                <settings.showInformation>
+                        <TCEforms>
+                                <label>Show Video Title and Information</label>
+                                <config>
+                                        <type>check</type>
+                               </config>
+                       </TCEforms>
+                </settings.showInformation>
+
                 <settings.playlists>
                         <TCEforms>
                                 <label>Playlists</label>

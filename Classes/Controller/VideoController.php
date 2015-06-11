@@ -78,6 +78,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$this->view->assign('flowplayerLicenseKey', $flowplayerLicenseKey);
                 $this->view->assign('video', $video);
 		$this->view->assign('playlists', $playlists);
+		$this->view->assign('showInformation', $this->settings['showInformation']);
 	}
 
         /**
@@ -119,6 +120,7 @@ class VideoController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$this->view->assign('flowplayerLicenseKey', $flowplayerLicenseKey);
                 $this->view->assign('video', $video);
                 $this->view->assign('playlists', $playlists);
+		$this->view->assign('showInformation', $this->settings['showInformation']);
         }
 
 }
