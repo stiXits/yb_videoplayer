@@ -24,7 +24,10 @@ class SetFullnameIdentIfierHook{
 		
 			$video = $videoRepository->findByUid($id);
 			if($video == null)			
+			{
+//				\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump('couldn\'t find video('.$id.') in repository');
 				return;
+			}
 
 			if($video->getFiles()->count() > 0)
 			{

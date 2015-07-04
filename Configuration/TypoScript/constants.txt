@@ -12,13 +12,13 @@ plugin.tx_ybvideoplayer {
 		storagePid =
 	}
 	configuration {
-		flowplayerSkinCss = EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/skin/minimalist.css
-		flowplayerPlaylistCss = EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/skin/playlist.css
-		flowplayerJs =  EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/flowplayer.min.js
+		flowplayerSkinCss = EXT:yb_videoplayer/Resources/Public/flowplayer-6.0.2/skin/minimalist.css
+		flowplayerPlaylistCss = EXT:yb_videoplayer/Resources/Public/flowplayer-6.0.2/skin/playlist.css
+		flowplayerJs =  EXT:yb_videoplayer/Resources/Public/flowplayer-6.0.2/flowplayer.min.js
 		videoplayerJs = EXT:yb_videoplayer/Resources/Public/JS/yb_videoplayer.js
 		flowplayerResolutionsJs = EXT:yb_videoplayer/Resources/Public/JS/quality-selector.js
 		flowplayerResolutionsCss = EXT:yb_videoplayer/Resources/Public/CSS/quality-selector.css
-		#flowplayerJs =  EXT:yb_videoplayer/Resources/Public/flowplayer-5.4.4/flowplayer.js
+		#flowplayerJs =  EXT:yb_videoplayer/Resources/Public/flowplayer-6.0.2/flowplayer.js
 	}
 }
 

@@ -18,7 +18,7 @@
                         </basePath>
                         <publicPath>
                                 <TCEforms>
-                                        <label>LLL:EXT:lang/locallang_mod_file_list.xlf:localDriverFlexform_publicPath</label>
+                                        <label>public path</label>
                                         <config>
                                                 <type>input</type>
                                                 <default>http://</default>
