@@ -39,8 +39,7 @@
 
                 <settings.localVideo>
                         <TCEforms>
-				<displayCond>FIELD:settings.useFirstFromPlaylist:=:0</displayCond>
-                                <label>Or choose a custom local video</label>
+                                <label>Or choose a custom local video (XOR)</label>
                                 <config>
                                         <type>group</type>
                                         <internal_type>db</internal_type>
