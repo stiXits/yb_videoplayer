@@ -15,9 +15,9 @@
 	style="background-image:url({video.preview.originalResource.publicUrl});">
 
 	<f:render partial="Video/VideoContainer" arguments="{video: video}"/>
-	<f:for each="{playlists}" as="playlist" iteration="itemIteration">
+	<!--f:for each="{playlists}" as="playlist" iteration="itemIteration">
 		<f:render partial="Playlist/PlaylistContainer" arguments="{playlist: playlist}"/>
-	</f:for>
+	</f:for-->
 </div>
 
 <f:if condition="{showInformation}==1">

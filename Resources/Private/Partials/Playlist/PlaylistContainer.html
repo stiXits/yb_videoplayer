@@ -1,6 +1,6 @@
 <div class="fp-playlist">
         <f:for each="{playlist.videos}" as="video" iteration="itemIteration">
-                <a class="is-active" href="{video.file.originalResource.publicUrl}">
+                <a class="is-active" href="{video.files.0.originalResource.publicUrl}">
                         <img src="{video.preview.originalResource.publicUrl}">
                 </a>
        </f:for>
