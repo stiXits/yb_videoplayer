@@ -3,16 +3,16 @@ if (!defined('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+/*\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
 	$_EXTKEY,
 	'globalVideoPlayer',
 	'Global Videoplayer'
-);
+);*/
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
         $_EXTKEY,
         'localVideoPlayer',
-        'Local Videoplayer'
+        'Videoplayer'
 );
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(

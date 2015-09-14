@@ -14,7 +14,7 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['extbase']['commandControllers'][] = '
 $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['processDatamapClass'][] = 'EXT:yb_videoplayer/Classes/Hooks/SetFullnameIdentifierHook.php:SetFullnameIdentifierHook';
 
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+/*\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	'TYPO3.' . $_EXTKEY,
 	'globalVideoPlayer',
 	array(
@@ -23,7 +23,7 @@ $GLOBALS ['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['pro
 	// non-cacheable actions
 	array(
 	)
-);
+);*/
 
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'TYPO3.' . $_EXTKEY,
