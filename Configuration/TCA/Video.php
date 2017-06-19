@@ -110,7 +110,9 @@ $TCA['tx_ybvideoplayer_domain_model_video'] = array (
                                                 'type'          => 'script',
                                                 'title'         => 'Full screen Rich Text Editing|Formatteret redigering i hele vinduet',
                                                 'icon'          => 'wizard_rte2.gif',
-                                                'script'        => 'wizard_rte.php',
+						'module' => array(
+							'name' => 'wizard_rte',
+						),
                                         ),
                                 ),
                         )
