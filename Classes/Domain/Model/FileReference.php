@@ -29,7 +29,7 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference {
 	$this->tablenames = 'tx_ybvideoplayer_domain_model_video';
 	$this->title = $resolution;
 
-	\t3lib_div::devLog('Isert filereference:', 'yb_videoplayer', 1, array($dataArray, $res));
+	//\t3lib_div::devLog('Isert filereference:', 'yb_videoplayer', 1, array($dataArray, $res));
 
 	$fileReference = $fileFactory->getFileReferenceObject($originalResource->getUid(), $dataArray);
         $this->originalResource = $fileReference;
